@@ -18,16 +18,16 @@ namespace MoviesManagement.Application.Users.Commands.Create
         {
             await ValidateUserExtension.ValidateQuery(request, cancellationToken);
 
-            var userExists = await _userRepository.Exists(request.Username, cancellationToken);
+            var userExists = await _userRepository.ExistsAsync(request.Username, cancellationToken);
 
             if (userExists)
                 throw new UserAlreadyExistsException($"User with name {request.Username} already exsits");
 
             var user = CreateUserExtension.CreateUserModel(request);
 
-            var userResponse = await _userRepository.Add(user);
+            var userResponse = await _userRepository.AddAsync(user);
 
-            if (userResponse is false)
+            if (userResponse.HasValue is false)
                 throw new UserNotRegisteredException("There was some problem while adding the user, try again later");
 
             return Unit.Value;
