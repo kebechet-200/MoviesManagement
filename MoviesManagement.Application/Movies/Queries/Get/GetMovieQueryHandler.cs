@@ -16,13 +16,13 @@ namespace MoviesManagement.Application.Movies.Queries.Get
 
         public async Task<Movie> Handle(GetMovieQuery request, CancellationToken cancellationToken)
         {
-            if (request.Guid == Guid.Empty)
+            if (request.id == Guid.Empty)
                 throw new MoviesNotFoundException($"Movie id is empty");
 
-            var movie = await _movieRepository.GetAsync(request.Guid);
+            var movie = await _movieRepository.GetAsync(request.id);
 
             if (movie is null)
-                throw new MoviesNotFoundException($"The movie with an id of {request.Guid} not found");
+                throw new MoviesNotFoundException($"The movie with an id of {request.id} not found");
 
             return movie;
         }
