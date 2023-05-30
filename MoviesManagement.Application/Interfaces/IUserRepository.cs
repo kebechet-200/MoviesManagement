@@ -6,7 +6,7 @@ namespace MoviesManagement.Application.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> GetAsync(int id);
+        Task<User> GetAsync(Guid id);
         Task<IQueryable<User>> GetAllAsync();
         Task<Guid?> AddAsync(User user);
         Task<Guid?> UpdateAsync(User user);
