@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MoviesManagement.Domain.Common.Exceptions
+﻿namespace MoviesManagement.Domain.Common.Exceptions
 {
     public class UserDoesNotExistException : Exception
     {

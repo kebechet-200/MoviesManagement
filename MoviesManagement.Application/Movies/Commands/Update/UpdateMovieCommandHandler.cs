@@ -3,12 +3,7 @@ using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Interfaces;
 using MoviesManagement.Domain.Common.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoviesManagement.Application.Movies.Commands.Update
 {

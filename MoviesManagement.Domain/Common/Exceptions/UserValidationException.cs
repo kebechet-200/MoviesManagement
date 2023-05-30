@@ -1,6 +1,4 @@
-﻿
-
-namespace MoviesManagement.Domain.Common.Exceptions
+﻿namespace MoviesManagement.Domain.Common.Exceptions
 {
     public class UserValidationException : Exception
     {

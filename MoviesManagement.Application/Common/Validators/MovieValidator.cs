@@ -1,11 +1,5 @@
 ﻿using FluentValidation;
 using MoviesManagement.Application.Common.Models;
-using MoviesManagement.Application.Movies.Commands.Add;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoviesManagement.Application.Common.Validators
 {

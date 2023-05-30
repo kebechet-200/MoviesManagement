@@ -1,10 +1,4 @@
-﻿using MoviesManagement.Application.Movies.Commands.Add;
-using MoviesManagement.Domain.POCO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Common.Models
 {

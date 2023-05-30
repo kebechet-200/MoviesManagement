@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MoviesManagement.Domain.Common.Exceptions
+﻿namespace MoviesManagement.Domain.Common.Exceptions
 {
-    internal class MovieAlreadyStartedException
+    public class MovieAlreadyStartedException : Exception
     {
+        public const string Code = "Movie already started";
+
+        public MovieAlreadyStartedException(string message) : base(message) { }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace MoviesManagement.Domain.Common
+﻿namespace MoviesManagement.Domain.Common
 {
     public class BaseEntity
     {

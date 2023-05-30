@@ -1,6 +1,4 @@
-﻿
-
-using MoviesManagement.Domain.POCO;
+﻿using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Interfaces
 {
