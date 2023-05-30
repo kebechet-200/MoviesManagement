@@ -6,9 +6,13 @@ namespace MoviesManagement.Application.Interfaces
 {
     public interface IUserRepository
     {
-        Task<bool> Exists(string username, CancellationToken cancellationToken);
-        Task<Guid?> Validate(User user, CancellationToken cancellationToken);
-        Task<bool> Add(User user);
-        Task<bool> Update(User user);
+        Task<User> GetAsync(int id);
+        Task<IQueryable<User>> GetAllAsync();
+        Task<Guid?> AddAsync(User user);
+        Task<Guid?> UpdateAsync(User user);
+        Task<Guid?> DeleteAsync(Guid guid);
+
+        Task<bool> ExistsAsync(string username, CancellationToken cancellationToken);
+        Task<Guid?> ValidateAsync(User user, CancellationToken cancellationToken);
     }
 }

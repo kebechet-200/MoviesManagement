@@ -30,14 +30,14 @@ namespace MoviesManagement.Application.Users.Queries.GenerateToken
 
                 await ValidateUserExtension.ValidateQuery(request, cancellationToken);
 
-                var userExists = await _userRepository.Exists(request.Username, cancellationToken);
+                var userExists = await _userRepository.ExistsAsync(request.Username, cancellationToken);
 
                 if (userExists is false)
                     throw new UserDoesNotExistException($"The user with name {request.Username} does not exist");
 
                 var user = CreateUserExtension.CreateUserModel(request);
 
-                Guid? userId = await _userRepository.Validate(user, cancellationToken);
+                Guid? userId = await _userRepository.ValidateAsync(user, cancellationToken);
 
                 if (userId.HasValue is false)
                     throw new InvalidUserException($"Username or password is invalid");
