@@ -17,7 +17,7 @@ namespace MoviesManagement.Application.Users.Queries.Get
         public async Task<User> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             if (request.id == Guid.Empty)
-                throw new MoviesNotFoundException($"user id is empty");
+                throw new User($"user id is empty");
 
             var user = await _userRepository.GetAsync(request.id);
 

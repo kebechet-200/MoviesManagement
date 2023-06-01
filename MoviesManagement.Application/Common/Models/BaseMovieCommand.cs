@@ -2,7 +2,7 @@
 
 namespace MoviesManagement.Application.Common.Models
 {
-    public class BaseMovieCommand
+    public class BaseMovieModel
     {
         public string Name { get; init; } = string.Empty;
         public string Image { get; init; } = string.Empty;
@@ -12,9 +12,9 @@ namespace MoviesManagement.Application.Common.Models
         public bool IsExpired { get; init; }
     }
 
-    public static class MovieCommandExtensions
+    public static class MovieExtensions
     {
-        public static Movie ToMovieDomainModel(this BaseMovieCommand movie)
+        public static Movie ToMovieDomainModel(this BaseMovieModel movie)
         {
             return new Movie
             {

@@ -5,20 +5,20 @@ using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Interfaces;
 using MoviesManagement.Domain.Common.Exceptions;
 
-namespace MoviesManagement.Application.Movies.Commands.Add
+namespace MoviesManagement.Application.Movies.Commands.Create
 {
-    public class AddMovieCommandHandler : IRequestHandler<AddMovieCommand, Unit>
+    public class CreateMovieCommandHandler : IRequestHandler<CreateMovieCommand, Unit>
     {
-        MovieValidator<AddMovieCommand> _validator;
+        MovieValidator<CreateMovieCommand> _validator;
         IMovieRepository _movieRepository;
 
-        public AddMovieCommandHandler(IMovieRepository movieRepository)
+        public CreateMovieCommandHandler(IMovieRepository movieRepository)
         {
             _validator = new();
             _movieRepository = movieRepository;
         }
 
-        public async Task<Unit> Handle(AddMovieCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request);
 

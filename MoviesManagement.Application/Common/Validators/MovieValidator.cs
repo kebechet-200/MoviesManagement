@@ -3,7 +3,7 @@ using MoviesManagement.Application.Common.Models;
 
 namespace MoviesManagement.Application.Common.Validators
 {
-    public class MovieValidator<T> : AbstractValidator<T> where T : BaseMovieCommand
+    public class MovieValidator<T> : AbstractValidator<T> where T : BaseMovieModel
     {
         public MovieValidator()
         {
