@@ -2,8 +2,8 @@
 {
     public enum TicketEnum
     {
-        Bought = 1,
-        Reserved = 2,
-        Cancelled = 3
+        Buy = 1,
+        Reserve = 2,
+        Cancel = 3
     }
 }
