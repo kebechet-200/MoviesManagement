@@ -43,8 +43,7 @@ namespace MoviesManagement.Application.Tickets.Commands.Buy
 
 
             if (movie.IsActive is false)
-                throw new Exception();// TODO : add exception
-            
+                throw new MovieIsInactiveException("The movie is inactive");
             
             bool isMovieStartedAlready = movie.IsExpired || DateTime.UtcNow > movie.StartDate;
 

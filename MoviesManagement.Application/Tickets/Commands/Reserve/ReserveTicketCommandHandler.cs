@@ -12,7 +12,9 @@ namespace MoviesManagement.Application.Tickets.Commands.Reserve
         private readonly IMovieRepository _movieRepository;
         private readonly ITicketRepository _ticketRepository;
 
-        public ReserveTicketCommandHandler(IUserRepository userRepository, IMovieRepository movieRepository, ITicketRepository ticketRepository)
+        public ReserveTicketCommandHandler(IUserRepository userRepository,
+                                           IMovieRepository movieRepository,
+                                           ITicketRepository ticketRepository)
         {
             _userRepository = userRepository;
             _movieRepository = movieRepository;
@@ -39,8 +41,8 @@ namespace MoviesManagement.Application.Tickets.Commands.Reserve
             if (movie is null)
                 throw new MoviesNotFoundException($"Movie with an id {request.MovieId} does not exist in the database");
 
-            if (movie.IsActive)
-                throw new Exception(); // TODO : Implement exception
+            if (movie.IsActive is false)
+                throw new MovieIsInactiveException("The movie is inactive");
 
             bool isMovieStartedAlready = movie.IsExpired || DateTime.UtcNow > movie.StartDate;
 
