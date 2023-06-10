@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Common.Validators;
-using MoviesManagement.Application.Interfaces;
+using MoviesManagement.Application.Contracts;
 using MoviesManagement.Domain.Common.Exceptions;
 using System.ComponentModel.DataAnnotations;
 

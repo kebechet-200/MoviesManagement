@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MoviesManagement.Application.Interfaces;
+using MoviesManagement.Application.Contracts;
 using MoviesManagement.Application.Movies.Commands.Delete;
 using MoviesManagement.Domain.Common.Exceptions;
 
