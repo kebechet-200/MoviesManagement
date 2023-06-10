@@ -3,7 +3,6 @@ using MoviesManagement.Application.Common.Extensions;
 using MoviesManagement.Application.Interfaces;
 using MoviesManagement.Domain.Common.Enum;
 using MoviesManagement.Domain.Common.Exceptions;
-using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Tickets.Commands.Buy
 {
@@ -30,11 +29,11 @@ namespace MoviesManagement.Application.Tickets.Commands.Buy
             if (request.MovieId == Guid.Empty)
                 throw new TicketNotFoundException("MovieId is empty");
 
-            if (request.State is not TicketEnum.Bought)
+            if (request.State is not TicketEnum.Buy)
                 throw new InvalidStateException("Ticket status is not Buy");
 
-            var user = await _userRepository.GetAsync(request.UserId);
-            var movie = await _movieRepository.GetAsync(request.MovieId);
+            var user = await _userRepository.GetAsync(request.UserId).ConfigureAwait(false);
+            var movie = await _movieRepository.GetAsync(request.MovieId).ConfigureAwait(false);
 
             if (user is null)
                 throw new UserDoesNotExistException($"User with an id {request.UserId} does not exist in the database");
@@ -42,22 +41,24 @@ namespace MoviesManagement.Application.Tickets.Commands.Buy
             if (movie is null)
                 throw new MoviesNotFoundException($"Movie with an id {request.MovieId} does not exist in the database");
 
-            return await BuyTicket(user, movie, request);
-        }
 
-        private async Task<Unit> BuyTicket(User user, Movie movie, BuyTicketCommand request)
-        {
-            if (movie.StartDate < DateTime.UtcNow)
-                throw new MovieAlreadyStartedException("The movie has already started.");
+            if (movie.IsActive is false)
+                throw new Exception();// TODO : add exception
+            
+            
+            bool isMovieStartedAlready = movie.IsExpired || DateTime.UtcNow > movie.StartDate;
+
+            if (isMovieStartedAlready)
+                throw new MovieAlreadyStartedException("The movie that you are trying to buy already started.");
 
             var movieTickets = user.Tickets
                 .Where(x => x.UserId == user.Id)
                 .Where(x => x.MovieId == movie.Id);
 
-            if (movieTickets.Any(x => x.State == TicketEnum.Bought))
+            if (movieTickets.Any(x => x.State == TicketEnum.Buy))
                 throw new YouAlreadyBoughtTicketException("You already bought the ticket");
 
-            await _ticketRepository.BuyTicketAsync(request.TicketCommandToDomain());
+            await _ticketRepository.BuyTicketAsync(request.TicketCommandToDomain()).ConfigureAwait(false);
 
             return Unit.Value;
         }

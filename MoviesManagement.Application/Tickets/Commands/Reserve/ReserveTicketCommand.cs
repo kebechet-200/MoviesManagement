@@ -1,6 +1,7 @@
-﻿namespace MoviesManagement.Application.Tickets.Commands.Reserve
+﻿using MediatR;
+using MoviesManagement.Application.Common.Models;
+
+namespace MoviesManagement.Application.Tickets.Commands.Reserve
 {
-    internal class ReserveTicketCommand
-    {
-    }
+    public class ReserveTicketCommand : BaseTicketModel, IRequest<Unit> { }
 }
