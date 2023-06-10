@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using MoviesManagement.Application.Common.Extensions;
-using MoviesManagement.Application.Interfaces;
+using MoviesManagement.Application.Contracts;
 using MoviesManagement.Application.Common;
 using MoviesManagement.Domain.Common.Exceptions;
 using System.IdentityModel.Tokens.Jwt;

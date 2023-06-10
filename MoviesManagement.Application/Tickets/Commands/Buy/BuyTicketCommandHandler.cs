@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using MoviesManagement.Application.Common.Extensions;
-using MoviesManagement.Application.Interfaces;
+using MoviesManagement.Application.Contracts;
 using MoviesManagement.Domain.Common.Enum;
 using MoviesManagement.Domain.Common.Exceptions;
 
