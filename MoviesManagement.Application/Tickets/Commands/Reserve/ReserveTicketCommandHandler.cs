@@ -52,7 +52,7 @@ namespace MoviesManagement.Application.Tickets.Commands.Reserve
             bool isLessThanHourFromStart = DateTime.UtcNow > movie.StartDate.AddHours(-1);
 
             if (isLessThanHourFromStart)
-                throw new MovieStartsLessThanAnHourException("The movie that you are trying to reserve starts less than an hour.");
+                throw new MovieStartsLessThanAnHourException("You can't reserve the movie starts less than an hour.");
 
             var movieTickets = user.Tickets
                 .Where(x => x.UserId == user.Id)
