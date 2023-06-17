@@ -8,6 +8,6 @@ public interface ITicketRepository
     Task ReserveTicketAsync(Ticket ticket);
     Task CancelTicketAsync(Ticket ticket);
 
-    Task<Ticket> GetTicketAsync(Guid id);
+    Task<Ticket> GetTicketAsync(Guid movieId, Guid userId);
     Task<IQueryable<Ticket>> GetAllTicketAsync();
 }
