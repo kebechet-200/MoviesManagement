@@ -3,5 +3,9 @@ using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Tickets.Queries.Get
 {
-    public record GetTicketQuery(Ticket ticket) : IRequest<Ticket>;
+    public sealed class GetTicketQuery : IRequest<Ticket>
+    {
+        public Guid UserId { get; init; } = default;
+        public Guid MovieId { get; init; } = default;
+    }
 }
