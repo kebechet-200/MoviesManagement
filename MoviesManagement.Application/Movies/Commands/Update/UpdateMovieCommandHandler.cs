@@ -20,12 +20,12 @@ namespace MoviesManagement.Application.Movies.Commands.Update
 
         public async Task<Unit> Handle(UpdateMovieCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(request);
+            var validationResult = await _validator.ValidateAsync(request).ConfigureAwait(false);
 
             if (validationResult.IsValid is false)
                 throw new ValidationException(validationResult.Errors.FirstOrDefault()?.ToString());
 
-            var result = await _movieRepository.UpdateAsync(request.ToMovieDomainModel());
+            var result = await _movieRepository.UpdateAsync(request.ToMovieDomainModel()).ConfigureAwait(false);
 
             if (result.HasValue is false)
                 throw new MovieCannotBeUpdatedException("The movie can not be updated");

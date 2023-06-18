@@ -16,7 +16,7 @@ namespace MoviesManagement.Application.Tickets.Queries.GetAll
 
         public async Task<IQueryable<Ticket>> Handle(GetAllTicketQuery request, CancellationToken cancellationToken)
         {
-            var tickets = await _ticketRepository.GetAllTicketAsync();
+            var tickets = await _ticketRepository.GetAllTicketAsync().ConfigureAwait(false);
 
             if (tickets is null || !tickets.Any())
                 throw new TicketNotFoundException("Tickets not found in the database");

@@ -20,12 +20,12 @@ namespace MoviesManagement.Application.Movies.Commands.Create
 
         public async Task<Unit> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(request);
+            var validationResult = await _validator.ValidateAsync(request).ConfigureAwait(false);
 
             if (validationResult.IsValid)
                 throw new ValidationException(validationResult.Errors.FirstOrDefault()?.ToString());
 
-            var result = await _movieRepository.CreateAsync(request.ToMovieDomainModel());
+            var result = await _movieRepository.CreateAsync(request.ToMovieDomainModel()).ConfigureAwait(false);
 
             if (result.HasValue is false)
                 throw new MovieCannotBeAddedException("Some error occured while adding the movie");

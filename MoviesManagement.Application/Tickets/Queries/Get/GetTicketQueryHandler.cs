@@ -22,7 +22,7 @@ namespace MoviesManagement.Application.Tickets.Queries.Get
             if (request.UserId == Guid.Empty)
                 throw new UserIdIsEmptyException($"User id is empty");
 
-            var ticket = await _ticketRepository.GetTicketAsync(request.MovieId, request.UserId);
+            var ticket = await _ticketRepository.GetTicketAsync(request.MovieId, request.UserId).ConfigureAwait(false);
 
             if (ticket is null)
                 throw new TicketNotFoundException($"Ticket not found on user id {request.UserId} and movie {request.MovieId}");
