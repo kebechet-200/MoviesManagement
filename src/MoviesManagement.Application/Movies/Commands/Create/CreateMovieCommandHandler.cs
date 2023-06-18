@@ -9,12 +9,12 @@ namespace MoviesManagement.Application.Movies.Commands.Create
 {
     public class CreateMovieCommandHandler : IRequestHandler<CreateMovieCommand, Unit>
     {
-        MovieValidator<CreateMovieCommand> _validator;
-        IMovieRepository _movieRepository;
+        private readonly MovieValidator<CreateMovieCommand> _validator;
+        private readonly IMovieRepository _movieRepository;
 
-        public CreateMovieCommandHandler(IMovieRepository movieRepository)
+        public CreateMovieCommandHandler(IMovieRepository movieRepository, MovieValidator<CreateMovieCommand> validator)
         {
-            _validator = new();
+            _validator = validator;
             _movieRepository = movieRepository;
         }
 

@@ -9,12 +9,12 @@ namespace MoviesManagement.Application.Movies.Commands.Update
 {
     public class UpdateMovieCommandHandler : IRequestHandler<UpdateMovieCommand, Unit>
     {
-        MovieValidator<UpdateMovieCommand> _validator;
-        IMovieRepository _movieRepository;
+        private readonly MovieValidator<UpdateMovieCommand> _validator;
+        private readonly IMovieRepository _movieRepository;
 
-        public UpdateMovieCommandHandler(IMovieRepository movieRepository)
+        public UpdateMovieCommandHandler(IMovieRepository movieRepository, MovieValidator<UpdateMovieCommand> validator)
         {
-            _validator = new(); // use di
+            _validator = validator;
             _movieRepository = movieRepository;
         }
 
