@@ -7,7 +7,7 @@ using FluentValidation;
 
 namespace MoviesManagement.Application.Tests.Movies.Commands
 {
-    public class CreateMovieCommandHandlerTests /*IClassFixture<MovieFixture>*/
+    public class CreateMovieCommandHandlerTests : IClassFixture<MovieFixture>
     {
         private readonly MovieFixture _movieFixture;
 
