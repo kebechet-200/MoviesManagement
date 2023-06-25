@@ -9,11 +9,15 @@ namespace MoviesManagement.Application.Common.Validators
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .MaximumLength(50);
+                    .WithMessage(ErrorMessages.MovieNameShouldNotBeEmpty)
+                .MaximumLength(50)
+                    .WithMessage(ErrorMessages.MovieNameLengthMustBeShorterThan50);
 
             RuleFor(x => x.Description)
                 .NotEmpty()
-                .MaximumLength(255);
+                    .WithMessage(ErrorMessages.MovieDescriptionShouldNotBeEmpty)
+                .MaximumLength(255)
+                    .WithMessage(ErrorMessages.MovieDescriptionLengthMustBeShorterThan255);
         }
     }
 }

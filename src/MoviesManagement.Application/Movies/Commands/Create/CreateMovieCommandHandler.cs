@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using MoviesManagement.Application.Common;
 using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Contracts;
@@ -27,8 +28,8 @@ namespace MoviesManagement.Application.Movies.Commands.Create
 
             var result = await _movieRepository.CreateAsync(request.ToMovieDomainModel()).ConfigureAwait(false);
 
-            if (result.HasValue is false)
-                throw new MovieCannotBeAddedException("Some error occured while adding the movie");
+            if (result == Guid.Empty)
+                throw new MovieCannotBeAddedException(ErrorMessages.MovieCannotBeAdded);
 
             return Unit.Value;
         }

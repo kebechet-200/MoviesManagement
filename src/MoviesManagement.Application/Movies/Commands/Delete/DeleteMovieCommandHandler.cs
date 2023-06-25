@@ -20,7 +20,7 @@ namespace MoviesManagement.Application.Movies.Commands.Delete
 
             var result = await _movieRepository.DeleteAsync(request.id).ConfigureAwait(false);
 
-            if (result.HasValue is false)
+            if (result == Guid.Empty)
                 throw new MovieCannotBeUpdatedException("The movie can not be deleted");
 
             return Unit.Value;
