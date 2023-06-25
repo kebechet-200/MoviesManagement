@@ -120,11 +120,20 @@
   <data name="MovieCannotBeAdded" xml:space="preserve">
     <value>Some error occured while adding the movie</value>
   </data>
+  <data name="MovieCannotBeDeleted" xml:space="preserve">
+    <value>The movie which you are trying to delete is unavailable</value>
+  </data>
+  <data name="MovieCannotBeUpdated" xml:space="preserve">
+    <value>The movie which you are trying to update is unavailable</value>
+  </data>
   <data name="MovieDescriptionLengthMustBeShorterThan255" xml:space="preserve">
     <value>The description you have entered must be less than 255 characters</value>
   </data>
   <data name="MovieDescriptionShouldNotBeEmpty" xml:space="preserve">
     <value>The description you have entered should not be an empty</value>
+  </data>
+  <data name="MovieIdIsEmpty" xml:space="preserve">
+    <value>An id of the is empty.</value>
   </data>
   <data name="MovieNameLengthMustBeShorterThan50" xml:space="preserve">
     <value>The name you have entered must be less than 50 characters</value>

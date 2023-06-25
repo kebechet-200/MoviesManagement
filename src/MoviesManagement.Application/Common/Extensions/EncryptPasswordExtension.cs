@@ -1,4 +1,6 @@
-﻿namespace MoviesManagement.Application.Common.Extensions
+﻿using System.Text;
+
+namespace MoviesManagement.Application.Common.Extensions
 {
     public static class EncryptPasswordExtension
     {

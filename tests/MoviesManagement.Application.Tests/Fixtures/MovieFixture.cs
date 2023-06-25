@@ -95,41 +95,5 @@ namespace MoviesManagement.Application.Tests.Fixtures
             Image = "some-image.png",
             StartDate = DateTime.Now
         };
-
-        //TODO : (REMOVE) It should not be in a ficture class.
-        private Movie _movieWithEmptyName = new Movie
-        {
-            Description= "test",
-            IsActive = true,
-            IsExpired = false,
-            Image = "some-image.png",
-            StartDate = DateTime.Now
-        };
-        private Movie _movieWithMoreThan50CharacterName = new Movie
-        {
-            Name = new string('t', 51),
-            Description = "test",
-            IsActive = true,
-            IsExpired = false,
-            Image = "some-image.png",
-            StartDate = DateTime.Now
-        };
-        private Movie _movieWithEmptyDescription = new Movie
-        {
-            Name = "success",
-            IsActive = true,
-            IsExpired = false,
-            Image = "some-image.png",
-            StartDate = DateTime.Now
-        };
-        private Movie _movieWithMoreThan255CharacterDescription = new Movie
-        {
-            Name = "success",
-            Description = "test",
-            IsActive = true,
-            IsExpired = false,
-            Image = "some-image.png",
-            StartDate = DateTime.Now
-        };
     }
 }
