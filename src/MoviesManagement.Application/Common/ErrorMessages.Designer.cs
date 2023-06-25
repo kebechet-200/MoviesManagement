@@ -22,7 +22,7 @@ namespace MoviesManagement.Application.Common {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ErrorMessages {
+    public class ErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace MoviesManagement.Application.Common {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MoviesManagement.Application.Common.ErrorMessages", typeof(ErrorMessages).Assembly);
@@ -51,7 +51,7 @@ namespace MoviesManagement.Application.Common {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,16 +63,34 @@ namespace MoviesManagement.Application.Common {
         /// <summary>
         ///   Looks up a localized string similar to Some error occured while adding the movie.
         /// </summary>
-        internal static string MovieCannotBeAdded {
+        public static string MovieCannotBeAdded {
             get {
                 return ResourceManager.GetString("MovieCannotBeAdded", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The movie which you are trying to delete is unavailable.
+        /// </summary>
+        public static string MovieCannotBeDeleted {
+            get {
+                return ResourceManager.GetString("MovieCannotBeDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The movie which you are trying to update is unavailable.
+        /// </summary>
+        public static string MovieCannotBeUpdated {
+            get {
+                return ResourceManager.GetString("MovieCannotBeUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The description you have entered must be less than 255 characters.
         /// </summary>
-        internal static string MovieDescriptionLengthMustBeShorterThan255 {
+        public static string MovieDescriptionLengthMustBeShorterThan255 {
             get {
                 return ResourceManager.GetString("MovieDescriptionLengthMustBeShorterThan255", resourceCulture);
             }
@@ -81,16 +99,25 @@ namespace MoviesManagement.Application.Common {
         /// <summary>
         ///   Looks up a localized string similar to The description you have entered should not be an empty.
         /// </summary>
-        internal static string MovieDescriptionShouldNotBeEmpty {
+        public static string MovieDescriptionShouldNotBeEmpty {
             get {
                 return ResourceManager.GetString("MovieDescriptionShouldNotBeEmpty", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An id of the is empty..
+        /// </summary>
+        public static string MovieIdIsEmpty {
+            get {
+                return ResourceManager.GetString("MovieIdIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name you have entered must be less than 50 characters.
         /// </summary>
-        internal static string MovieNameLengthMustBeShorterThan50 {
+        public static string MovieNameLengthMustBeShorterThan50 {
             get {
                 return ResourceManager.GetString("MovieNameLengthMustBeShorterThan50", resourceCulture);
             }
@@ -99,7 +126,7 @@ namespace MoviesManagement.Application.Common {
         /// <summary>
         ///   Looks up a localized string similar to The name you have entered should not be an empty.
         /// </summary>
-        internal static string MovieNameShouldNotBeEmpty {
+        public static string MovieNameShouldNotBeEmpty {
             get {
                 return ResourceManager.GetString("MovieNameShouldNotBeEmpty", resourceCulture);
             }
