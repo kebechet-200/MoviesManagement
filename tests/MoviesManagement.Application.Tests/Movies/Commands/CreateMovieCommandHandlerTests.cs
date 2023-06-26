@@ -9,7 +9,7 @@ namespace MoviesManagement.Application.Tests.Movies.Commands
 {
     public class CreateMovieCommandHandlerTests : IClassFixture<MovieFixture>
     {
-        private readonly MovieFixture _movieFixture;
+        public readonly MovieFixture _movieFixture;
 
         public CreateMovieCommandHandlerTests(MovieFixture movieFixture)
         {

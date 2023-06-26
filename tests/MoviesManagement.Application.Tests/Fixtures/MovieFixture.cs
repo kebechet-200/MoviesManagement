@@ -7,6 +7,7 @@ using MoviesManagement.Application.Movies.Commands.Update;
 using MoviesManagement.Domain.POCO;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
+using MoviesManagement.Application.Common.Validators;
 
 namespace MoviesManagement.Application.Tests.Fixtures
 {
@@ -20,7 +21,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
             get
             {
                 ServiceProvider serviceProvider = ServiceCollection.BuildServiceProvider();
-                CreateMovieCommandHandler? service = serviceProvider.GetService<CreateMovieCommandHandler>()!;
+                CreateMovieCommandHandler service = serviceProvider.GetRequiredService<CreateMovieCommandHandler>();
                 return service;
             }
         }
@@ -74,6 +75,10 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _movieRepository
                 .Setup(x => x.DeleteAsync(Guid.NewGuid()))
                 .ReturnsAsync(Guid.Empty);
+
+            _ = ServiceCollection.AddTransient(_ => _movieRepository.Object);
+            _ = ServiceCollection.AddTransient<CreateMovieCommandHandler>();
+            _ = ServiceCollection.AddTransient<MovieValidator<CreateMovieCommand>>();
         }
 
         private Movie _successMovie = new Movie 
