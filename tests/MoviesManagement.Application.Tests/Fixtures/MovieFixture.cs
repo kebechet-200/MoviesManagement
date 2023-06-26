@@ -8,6 +8,7 @@ using MoviesManagement.Domain.POCO;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
 using MoviesManagement.Application.Common.Validators;
+using MoviesManagement.Application.Common.Models;
 
 namespace MoviesManagement.Application.Tests.Fixtures
 {
@@ -48,6 +49,8 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
         public MovieFixture()
         {
+            #region Movie command handler mocks
+
             // Create movie.
             _movieRepository
                 .Setup(x => x.CreateAsync(_successMovie))
@@ -76,9 +79,25 @@ namespace MoviesManagement.Application.Tests.Fixtures
                 .Setup(x => x.DeleteAsync(Guid.NewGuid()))
                 .ReturnsAsync(Guid.Empty);
 
+            #endregion
+
+            #region Add transient services
+            AddServices();
+            #endregion
+        }
+
+        private void AddServices()
+        {
+            // Add repository mock
             _ = ServiceCollection.AddTransient(_ => _movieRepository.Object);
+
+            // Add handlers
             _ = ServiceCollection.AddTransient<CreateMovieCommandHandler>();
-            _ = ServiceCollection.AddTransient<MovieValidator<CreateMovieCommand>>();
+            _ = ServiceCollection.AddTransient<UpdateMovieCommandHandler>();
+            _ = ServiceCollection.AddTransient<DeleteMovieCommandHandler>();
+
+            // Add validator
+            _ = ServiceCollection.AddTransient<MovieValidator<BaseMovieModel>>();
         }
 
         private Movie _successMovie = new Movie 
