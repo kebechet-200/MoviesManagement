@@ -97,7 +97,8 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<DeleteMovieCommandHandler>();
 
             // Add validator
-            _ = ServiceCollection.AddTransient<MovieValidator<BaseMovieModel>>();
+            _ = ServiceCollection.AddTransient<MovieValidator<CreateMovieCommand>>();
+            _ = ServiceCollection.AddTransient<MovieValidator<UpdateMovieCommand>>();
         }
 
         private Movie _successMovie = new Movie 
