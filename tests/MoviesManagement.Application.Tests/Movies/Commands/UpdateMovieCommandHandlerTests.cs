@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoviesManagement.Application.Tests.Movies.Commands
 {
-    internal class UpdateMovieCommandHandlerTests
+    public class UpdateMovieCommandHandlerTests
     {
     }
 }

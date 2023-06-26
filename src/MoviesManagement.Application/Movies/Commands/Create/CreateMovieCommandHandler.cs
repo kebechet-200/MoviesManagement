@@ -23,7 +23,7 @@ namespace MoviesManagement.Application.Movies.Commands.Create
         {
             var validationResult = await _validator.ValidateAsync(request).ConfigureAwait(false);
 
-            if (validationResult.IsValid)
+            if (validationResult.IsValid is false)
                 throw new ValidationException(validationResult.Errors.FirstOrDefault()?.ToString());
 
             var result = await _movieRepository.CreateAsync(request.ToMovieDomainModel()).ConfigureAwait(false);
