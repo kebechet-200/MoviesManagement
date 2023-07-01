@@ -4,6 +4,9 @@ using MoviesManagement.Application.Tests.Fixtures;
 using MoviesManagement.Application.Common;
 using Xunit;
 using FluentValidation;
+using MoviesManagement.Domain.POCO;
+using MoviesManagement.Domain.Common.Exceptions;
+using MediatR;
 
 namespace MoviesManagement.Application.Tests.Movies.Commands
 {
@@ -104,6 +107,51 @@ namespace MoviesManagement.Application.Tests.Movies.Commands
             exception.Message.Should().Be(ErrorMessages.MovieDescriptionLengthMustBeShorterThan255);
         }
 
+        [Fact]
+        public async Task Handle_WhenRepositoryReturnsFail_ShouldThrowMovieCannotBeAddedException()
+        {
+            // Arrange
+            Exception exception = default!;
+            var handler = _movieFixture.CreateMovieCommandHandler;
+
+            // Act
+            try
+            {
+                var result = await handler.Handle(_failedMovie, CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
+
+            //Assert
+            exception.Should().NotBeNull().And.BeOfType<MovieCannotBeAddedException>();
+            exception.Message.Should().Be(ErrorMessages.MovieCannotBeAdded);
+        }
+
+        [Fact]
+        public async Task Handle_WhenRepositoryReturnsSuccess_ShouldReturnUnitValue()
+        {
+            // Arrange
+            Exception? exception = default;
+            var handler = _movieFixture.CreateMovieCommandHandler;
+            Unit result = default;
+
+            // Act
+            try
+            {
+                result = await handler.Handle(_successMovie, CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
+
+            //Assert
+            exception.Should().BeNull();
+            result.Should().Be(Unit.Value);
+        }
+
         private CreateMovieCommand _movieWithEmptyName = new CreateMovieCommand
         {
             Description = "test",
@@ -133,6 +181,24 @@ namespace MoviesManagement.Application.Tests.Movies.Commands
         {
             Name = "success",
             Description = new string('t', 256),
+            IsActive = true,
+            IsExpired = false,
+            Image = "some-image.png",
+            StartDate = DateTime.Now
+        };
+        private CreateMovieCommand _successMovie = new CreateMovieCommand
+        {
+            Name = "success",
+            Description = "test",
+            IsActive = true,
+            IsExpired = false,
+            Image = "some-image.png",
+            StartDate = DateTime.Now
+        };
+        private CreateMovieCommand _failedMovie = new CreateMovieCommand
+        {
+            Name = "failed",
+            Description = "test",
             IsActive = true,
             IsExpired = false,
             Image = "some-image.png",
