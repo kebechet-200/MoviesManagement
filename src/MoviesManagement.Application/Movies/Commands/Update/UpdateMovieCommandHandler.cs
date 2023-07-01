@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MoviesManagement.Application.Common;
 using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Contracts;
@@ -28,7 +29,7 @@ namespace MoviesManagement.Application.Movies.Commands.Update
             var result = await _movieRepository.UpdateAsync(request.ToMovieDomainModel()).ConfigureAwait(false);
 
             if (result == Guid.Empty)
-                throw new MovieCannotBeUpdatedException("The movie can not be updated");
+                throw new MovieCannotBeUpdatedException(ErrorMessages.MovieCannotBeUpdated);
 
             return Unit.Value;
         }

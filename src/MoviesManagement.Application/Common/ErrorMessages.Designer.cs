@@ -70,7 +70,7 @@ namespace MoviesManagement.Application.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The movie which you are trying to delete is unavailable.
+        ///   Looks up a localized string similar to Some error occured while deleting the movie.
         /// </summary>
         public static string MovieCannotBeDeleted {
             get {
@@ -79,7 +79,7 @@ namespace MoviesManagement.Application.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The movie which you are trying to update is unavailable.
+        ///   Looks up a localized string similar to Some error occured while updating the movie.
         /// </summary>
         public static string MovieCannotBeUpdated {
             get {
