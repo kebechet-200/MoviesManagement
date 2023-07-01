@@ -5,8 +5,6 @@ using MoviesManagement.Application.Movies.Commands.Create;
 using MoviesManagement.Application.Movies.Commands.Delete;
 using MoviesManagement.Application.Movies.Commands.Update;
 using MoviesManagement.Domain.POCO;
-using static System.Net.Mime.MediaTypeNames;
-using System.Xml.Linq;
 using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Common.Models;
 
@@ -49,34 +47,34 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
         public MovieFixture()
         {
+            var sampleGuid = new Guid("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
             #region Movie command handler mocks
 
             // Create movie.
             _movieRepository
-                .Setup(x => x.CreateAsync(_successMovie))
-                .ReturnsAsync(Guid.NewGuid());
+                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _successMovie.Name)))
+                .ReturnsAsync(sampleGuid);
 
             _movieRepository
-                .Setup(x => x.CreateAsync(_failedMovie))
+                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _failedMovie.Name)))
                 .ReturnsAsync(Guid.Empty);
 
             // Update movie.
             _movieRepository
-                .Setup(x => x.CreateAsync(_successMovie))
-                .ReturnsAsync(Guid.NewGuid());
+                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _successMovie.Name)))
+                .ReturnsAsync(sampleGuid);
 
             _movieRepository
-                .Setup(x => x.CreateAsync(_failedMovie))
+                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _failedMovie.Name)))
                 .ReturnsAsync(Guid.Empty);
 
             // Delete movie.
-            var guid = Guid.NewGuid();
             _movieRepository
-                .Setup(x => x.DeleteAsync(guid))
-                .ReturnsAsync(guid);
+                .Setup(x => x.DeleteAsync(sampleGuid))
+                .ReturnsAsync(sampleGuid);
 
             _movieRepository
-                .Setup(x => x.DeleteAsync(Guid.NewGuid()))
+                .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == Guid.Empty)))
                 .ReturnsAsync(Guid.Empty);
 
             #endregion
@@ -101,10 +99,10 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<MovieValidator<UpdateMovieCommand>>();
         }
 
-        private Movie _successMovie = new Movie 
-        { 
+        private CreateMovieCommand _successMovie = new CreateMovieCommand
+        {
             Name = "success",
-            Description= "test",
+            Description = "test",
             IsActive = true,
             IsExpired = false,
             Image = "some-image.png",
