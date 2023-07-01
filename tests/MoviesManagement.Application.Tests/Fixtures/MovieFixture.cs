@@ -101,22 +101,12 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
         private CreateMovieCommand _successMovie = new CreateMovieCommand
         {
-            Name = "success",
-            Description = "test",
-            IsActive = true,
-            IsExpired = false,
-            Image = "some-image.png",
-            StartDate = DateTime.Now
+            Name = "success"
         };
 
         private Movie _failedMovie = new Movie
         {
-            Name = "failed",
-            Description = "test",
-            IsActive = true,
-            IsExpired = false,
-            Image = "some-image.png",
-            StartDate = DateTime.Now
+            Name = "failed"
         };
     }
 }
