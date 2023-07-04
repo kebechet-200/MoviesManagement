@@ -3,5 +3,8 @@ using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Movies.Queries.Get
 {
-    public record GetMovieQuery(Guid id) : IRequest<Movie> { }
+    public class GetMovieQuery : IRequest<Movie> 
+    {
+        public Guid Id { get; init; }
+    }
 }

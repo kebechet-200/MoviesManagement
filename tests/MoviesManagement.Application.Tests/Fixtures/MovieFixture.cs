@@ -4,9 +4,9 @@ using MoviesManagement.Application.Contracts;
 using MoviesManagement.Application.Movies.Commands.Create;
 using MoviesManagement.Application.Movies.Commands.Delete;
 using MoviesManagement.Application.Movies.Commands.Update;
-using MoviesManagement.Domain.POCO;
 using MoviesManagement.Application.Common.Validators;
-using MoviesManagement.Application.Common.Models;
+using MoviesManagement.Domain.POCO;
+using MoviesManagement.Application.Movies.Queries.Get;
 
 namespace MoviesManagement.Application.Tests.Fixtures
 {
@@ -45,6 +45,16 @@ namespace MoviesManagement.Application.Tests.Fixtures
             }
         }
 
+        public GetMovieQueryHandler GetMovieQueryHandler
+        {
+            get
+            {
+                ServiceProvider serviceProvider = ServiceCollection.BuildServiceProvider();
+                GetMovieQueryHandler? service = serviceProvider.GetService<GetMovieQueryHandler>()!;
+                return service;
+            }
+        }
+
         public MovieFixture()
         {
             var successGuid = new Guid("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
@@ -53,20 +63,20 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
             // Create movie.
             _movieRepository
-                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _successMovie.Name)))
+                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _successMovieCommand.Name)))
                 .ReturnsAsync(successGuid);
 
             _movieRepository
-                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _failedMovie.Name)))
+                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _failedMovieCommand.Name)))
                 .ReturnsAsync(Guid.Empty);
 
             // Update movie.
             _movieRepository
-                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _successMovie.Name)))
+                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _successMovieCommand.Name)))
                 .ReturnsAsync(successGuid);
 
             _movieRepository
-                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _failedMovie.Name)))
+                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _failedMovieCommand.Name)))
                 .ReturnsAsync(Guid.Empty);
 
             // Delete movie.
@@ -77,6 +87,14 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _movieRepository
                 .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == failedGuid)))
                 .ReturnsAsync(Guid.Empty);
+
+            _movieRepository
+                .Setup(x => x.GetAsync(It.Is<Guid>(x => x == failedGuid)))
+                .ReturnsAsync((Movie)default!);
+
+            _movieRepository
+                .Setup(x => x.GetAsync(It.Is<Guid>(guid => guid == successGuid)))
+                .ReturnsAsync(_successMovie);
 
             #endregion
 
@@ -94,20 +112,31 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<CreateMovieCommandHandler>();
             _ = ServiceCollection.AddTransient<UpdateMovieCommandHandler>();
             _ = ServiceCollection.AddTransient<DeleteMovieCommandHandler>();
+            _ = ServiceCollection.AddTransient<GetMovieQueryHandler>();
 
             // Add validator
             _ = ServiceCollection.AddTransient<MovieValidator<CreateMovieCommand>>();
             _ = ServiceCollection.AddTransient<MovieValidator<UpdateMovieCommand>>();
         }
 
-        private CreateMovieCommand _successMovie = new CreateMovieCommand
+        private CreateMovieCommand _successMovieCommand = new CreateMovieCommand
         {
             Name = "success"
         };
 
-        private Movie _failedMovie = new Movie
+        private CreateMovieCommand _failedMovieCommand = new CreateMovieCommand
         {
             Name = "failed"
+        };
+
+        private Movie _successMovie = new Movie
+        {
+            Description = "testdescription",
+            Image = "testimage",
+            IsActive = true,
+            IsExpired = false,
+            Name = "success",
+            StartDate = DateTime.UtcNow.AddHours(1)
         };
     }
 }
