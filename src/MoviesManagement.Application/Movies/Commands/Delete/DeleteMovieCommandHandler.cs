@@ -16,10 +16,10 @@ namespace MoviesManagement.Application.Movies.Commands.Delete
 
         public async Task<Unit> Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
         {
-            if (request.id == Guid.Empty)
+            if (request.Id == Guid.Empty)
                 throw new MovieIdIsEmptyException(ErrorMessages.MovieIdIsEmpty);
 
-            var result = await _movieRepository.DeleteAsync(request.id).ConfigureAwait(false);
+            var result = await _movieRepository.DeleteAsync(request.Id).ConfigureAwait(false);
 
             if (result == Guid.Empty)
                 throw new MovieCannotBeDeletedException(ErrorMessages.MovieCannotBeDeleted);
