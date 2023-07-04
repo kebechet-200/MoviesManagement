@@ -141,4 +141,7 @@
   <data name="MovieNameShouldNotBeEmpty" xml:space="preserve">
     <value>The name you have entered should not be an empty</value>
   </data>
+  <data name="MovieNotFound" xml:space="preserve">
+    <value>The movie not found in the database</value>
+  </data>
 </root>

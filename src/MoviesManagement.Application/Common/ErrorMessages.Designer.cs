@@ -131,5 +131,14 @@ namespace MoviesManagement.Application.Common {
                 return ResourceManager.GetString("MovieNameShouldNotBeEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The movie not found in the database.
+        /// </summary>
+        public static string MovieNotFound {
+            get {
+                return ResourceManager.GetString("MovieNotFound", resourceCulture);
+            }
+        }
     }
 }
