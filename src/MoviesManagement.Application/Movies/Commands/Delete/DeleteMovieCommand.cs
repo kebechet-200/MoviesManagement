@@ -2,5 +2,8 @@
 
 namespace MoviesManagement.Application.Movies.Commands.Delete
 {
-    public record DeleteMovieCommand(Guid id) : IRequest<Unit>;
+    public class DeleteMovieCommand : IRequest<Unit> 
+    {
+        public Guid Id { get; init; }
+    }
 }

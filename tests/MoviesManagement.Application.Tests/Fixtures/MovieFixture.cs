@@ -47,13 +47,14 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
         public MovieFixture()
         {
-            var sampleGuid = new Guid("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
+            var successGuid = new Guid("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
+            var failedGuid = new Guid("{CF1A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
             #region Movie command handler mocks
 
             // Create movie.
             _movieRepository
                 .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _successMovie.Name)))
-                .ReturnsAsync(sampleGuid);
+                .ReturnsAsync(successGuid);
 
             _movieRepository
                 .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _failedMovie.Name)))
@@ -62,7 +63,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
             // Update movie.
             _movieRepository
                 .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _successMovie.Name)))
-                .ReturnsAsync(sampleGuid);
+                .ReturnsAsync(successGuid);
 
             _movieRepository
                 .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _failedMovie.Name)))
@@ -70,11 +71,11 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
             // Delete movie.
             _movieRepository
-                .Setup(x => x.DeleteAsync(sampleGuid))
-                .ReturnsAsync(sampleGuid);
+                .Setup(x => x.DeleteAsync(It.Is<Guid>(guid => guid == successGuid)))
+                .ReturnsAsync(successGuid);
 
             _movieRepository
-                .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == Guid.Empty)))
+                .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == failedGuid)))
                 .ReturnsAsync(Guid.Empty);
 
             #endregion
