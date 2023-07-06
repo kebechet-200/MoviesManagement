@@ -19,7 +19,7 @@ namespace MoviesManagement.Application.Users.Queries.Get
             if (request.id == Guid.Empty)
                 throw new UserIdIsEmptyException($"user id is empty");
 
-            var user = await _userRepository.GetAsync(request.id);
+            var user = await _userRepository.GetAsync(request.id).ConfigureAwait(false);
 
             if (user is null)
                 throw new MoviesNotFoundException($"The user with an id of {request.id} not found");

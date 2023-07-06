@@ -11,6 +11,5 @@ namespace MoviesManagement.Application.Common.Extensions
 
             return encryptedPassword;
         }
-
     }
 }

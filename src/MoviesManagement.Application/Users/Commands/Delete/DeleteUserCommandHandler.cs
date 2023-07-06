@@ -21,7 +21,7 @@ namespace MoviesManagement.Application.Users.Commands.Delete
 
             var result = await _userRepository.DeleteAsync(request.Id).ConfigureAwait(false);
 
-            if (result.HasValue is false)
+            if (result == Guid.Empty)
                 throw new MovieCannotBeUpdatedException("The movie can not be updated");
 
             return Unit.Value;

@@ -26,7 +26,7 @@ namespace MoviesManagement.Application.Users.Commands.Update
 
             var updatedUser =  await _userRepository.UpdateAsync(user).ConfigureAwait(false);
 
-            if (updatedUser.HasValue is false)
+            if (updatedUser == Guid.Empty)
                 throw new UserNotUpdatedException("There was some problem while updating user, try again later");
 
             return Unit.Value;

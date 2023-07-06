@@ -9,15 +9,15 @@ namespace MoviesManagement.Application.Common.Validators
         {
             RuleFor(x => x.Username)
                 .NotEmpty()
-                    .WithMessage("Username should not be empty")
+                    .WithMessage(ErrorMessages.UsernameShouldNotBeEmpty)
                 .Length(8, 15)
-                    .WithMessage("Username length should be between 8 and 15");
+                    .WithMessage(ErrorMessages.LessOrMoreUsernameLength);
 
             RuleFor(x => x.Password)
-                    .NotEmpty()
-                        .WithMessage("Password should not be empty")
-                    .Length(8, 15)
-                        .WithMessage("Password length should be between 8 and 15");
+                .NotEmpty()
+                    .WithMessage(ErrorMessages.PasswordShouldNotBeEmpty)
+                .Length(8, 15)
+                    .WithMessage(ErrorMessages.LessOrMorePasswordLength);
         }
     }
 }
