@@ -1,11 +1,10 @@
-﻿using FluentAssertions;
-using MoviesManagement.Application.Movies.Commands.Create;
+﻿using MoviesManagement.Application.Movies.Commands.Create;
 using MoviesManagement.Application.Tests.Fixtures;
 using MoviesManagement.Application.Common;
-using Xunit;
-using FluentValidation;
-using MoviesManagement.Domain.POCO;
 using MoviesManagement.Domain.Common.Exceptions;
+using Xunit;
+using FluentAssertions;
+using FluentValidation;
 using MediatR;
 
 namespace MoviesManagement.Application.Tests.Movies.Commands

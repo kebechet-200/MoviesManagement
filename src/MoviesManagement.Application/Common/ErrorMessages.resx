@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="LessOrMorePasswordLength" xml:space="preserve">
+    <value>Password length should be between 8 and 15</value>
+  </data>
+  <data name="LessOrMoreUsernameLength" xml:space="preserve">
+    <value>Username length should be between 8 and 15</value>
+  </data>
   <data name="MovieCannotBeAdded" xml:space="preserve">
     <value>Some error occured while adding the movie</value>
   </data>
@@ -143,5 +149,11 @@
   </data>
   <data name="MovieNotFound" xml:space="preserve">
     <value>The movie not found in the database</value>
+  </data>
+  <data name="PasswordShouldNotBeEmpty" xml:space="preserve">
+    <value>Password should not be empty</value>
+  </data>
+  <data name="UsernameShouldNotBeEmpty" xml:space="preserve">
+    <value>Username should not be empty</value>
   </data>
 </root>

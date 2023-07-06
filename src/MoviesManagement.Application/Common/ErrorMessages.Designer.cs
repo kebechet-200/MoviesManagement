@@ -61,6 +61,24 @@ namespace MoviesManagement.Application.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password length should be between 8 and 15.
+        /// </summary>
+        public static string LessOrMorePasswordLength {
+            get {
+                return ResourceManager.GetString("LessOrMorePasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username length should be between 8 and 15.
+        /// </summary>
+        public static string LessOrMoreUsernameLength {
+            get {
+                return ResourceManager.GetString("LessOrMoreUsernameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some error occured while adding the movie.
         /// </summary>
         public static string MovieCannotBeAdded {
@@ -138,6 +156,24 @@ namespace MoviesManagement.Application.Common {
         public static string MovieNotFound {
             get {
                 return ResourceManager.GetString("MovieNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password should not be empty.
+        /// </summary>
+        public static string PasswordShouldNotBeEmpty {
+            get {
+                return ResourceManager.GetString("PasswordShouldNotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username should not be empty.
+        /// </summary>
+        public static string UsernameShouldNotBeEmpty {
+            get {
+                return ResourceManager.GetString("UsernameShouldNotBeEmpty", resourceCulture);
             }
         }
     }

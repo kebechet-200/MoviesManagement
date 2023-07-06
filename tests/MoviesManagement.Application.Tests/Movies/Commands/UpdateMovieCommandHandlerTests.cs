@@ -1,16 +1,10 @@
 ﻿using FluentAssertions;
 using MediatR;
 using MoviesManagement.Application.Common;
-using MoviesManagement.Application.Movies.Commands.Create;
 using MoviesManagement.Application.Movies.Commands.Update;
 using MoviesManagement.Application.Tests.Fixtures;
 using MoviesManagement.Domain.Common.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace MoviesManagement.Application.Tests.Movies.Commands

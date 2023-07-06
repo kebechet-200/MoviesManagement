@@ -1,15 +1,10 @@
 ﻿using FluentAssertions;
+using Xunit;
 using MediatR;
 using MoviesManagement.Application.Common;
 using MoviesManagement.Application.Movies.Commands.Delete;
 using MoviesManagement.Application.Tests.Fixtures;
 using MoviesManagement.Domain.Common.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace MoviesManagement.Application.Tests.Movies.Commands
 {

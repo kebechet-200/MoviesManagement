@@ -37,12 +37,12 @@ namespace MoviesManagement.Application.Users.Queries.GenerateToken
 
                 var user = CreateUserExtension.CreateUserModel(request);
 
-                Guid? userId = await _userRepository.ValidateAsync(user, cancellationToken);
+                Guid userId = await _userRepository.ValidateAsync(user, cancellationToken);
 
-                if (userId.HasValue is false)
+                if (userId == Guid.Empty)
                     throw new InvalidUserException($"Username or password is invalid");
 
-                var token = GenerateSecurityToken(userId.Value);
+                var token = GenerateSecurityToken(userId);
 
                 return token;
             }
@@ -53,7 +53,6 @@ namespace MoviesManagement.Application.Users.Queries.GenerateToken
             }
         }
 
-        // TODO : Implement token generation using jwt handler
         private string GenerateSecurityToken(Guid guid)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -27,7 +27,7 @@ namespace MoviesManagement.Application.Users.Commands.Create
 
             var userResponse = await _userRepository.AddAsync(user).ConfigureAwait(false);
 
-            if (userResponse.HasValue is false)
+            if (userResponse == Guid.Empty)
                 throw new UserNotRegisteredException("There was some problem while adding the user, try again later");
 
             return Unit.Value;
