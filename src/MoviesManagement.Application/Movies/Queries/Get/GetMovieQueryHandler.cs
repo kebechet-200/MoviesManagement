@@ -20,7 +20,7 @@ namespace MoviesManagement.Application.Movies.Queries.Get
             if (request.Id == Guid.Empty)
                 throw new MovieIdIsEmptyException(ErrorMessages.MovieIdIsEmpty);
 
-            var movie = await _movieRepository.GetAsync(request.Id).ConfigureAwait(false);
+            var movie = await _movieRepository.GetAsync(request.Id, cancellationToken).ConfigureAwait(false);
 
             if (movie is null)
                 throw new MoviesNotFoundException(ErrorMessages.MovieNotFound);

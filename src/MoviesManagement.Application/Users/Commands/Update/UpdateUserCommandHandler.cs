@@ -24,7 +24,7 @@ namespace MoviesManagement.Application.Users.Commands.Update
 
             var user = CreateUserExtension.CreateUserModel(request);
 
-            var updatedUser =  await _userRepository.UpdateAsync(user).ConfigureAwait(false);
+            var updatedUser =  await _userRepository.UpdateAsync(user, cancellationToken).ConfigureAwait(false);
 
             if (updatedUser == Guid.Empty)
                 throw new UserNotUpdatedException("There was some problem while updating user, try again later");

@@ -25,7 +25,7 @@ namespace MoviesManagement.Application.Users.Commands.Create
 
             var user = CreateUserExtension.CreateUserModel(request);
 
-            var userResponse = await _userRepository.AddAsync(user).ConfigureAwait(false);
+            var userResponse = await _userRepository.AddAsync(user, cancellationToken).ConfigureAwait(false);
 
             if (userResponse == Guid.Empty)
                 throw new UserNotRegisteredException("There was some problem while adding the user, try again later");

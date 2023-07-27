@@ -4,10 +4,10 @@ namespace MoviesManagement.Application.Contracts;
 
 public interface ITicketRepository
 {
-    Task BuyTicketAsync(Ticket ticket);
-    Task ReserveTicketAsync(Ticket ticket);
-    Task CancelTicketAsync(Ticket ticket);
+    Task<Guid> BuyTicketAsync(Ticket ticket, CancellationToken cancellationToken);
+    Task<Guid> ReserveTicketAsync(Ticket ticket, CancellationToken cancellationToken);
+    Task<Guid> CancelTicketAsync(Ticket ticket, CancellationToken cancellationToken);
 
-    Task<Ticket> GetTicketAsync(Guid movieId, Guid userId);
-    Task<IQueryable<Ticket>> GetAllTicketAsync();
+    Task<Ticket> GetTicketAsync(Guid movieId, Guid userId, CancellationToken cancellationToken);
+    Task<IQueryable<Ticket>> GetAllTicketAsync(CancellationToken cancellationToken);
 }

@@ -42,7 +42,7 @@ namespace MoviesManagement.Application.Users.Queries.GenerateToken
                 if (userId == Guid.Empty)
                     throw new InvalidUserException($"Username or password is invalid");
 
-                var token = GenerateSecurityToken(userId);
+                var token = GenerateSecurityToken(userId, cancellationToken);
 
                 return token;
             }
@@ -53,7 +53,7 @@ namespace MoviesManagement.Application.Users.Queries.GenerateToken
             }
         }
 
-        private string GenerateSecurityToken(Guid guid)
+        private string GenerateSecurityToken(Guid guid, CancellationToken cancellationToken)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("SUPER-SECRET-PASSWORD");
