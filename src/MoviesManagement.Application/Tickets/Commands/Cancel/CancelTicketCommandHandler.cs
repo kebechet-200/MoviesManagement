@@ -56,7 +56,10 @@ namespace MoviesManagement.Application.Tickets.Commands.Cancel
             if (movieTickets.Any(x => x.State is not TicketEnum.Cancel))
                 throw new CantCancelTicketException("You don't have active tickets");
 
-            await _ticketRepository.CancelTicketAsync(request.TicketCommandToDomain()).ConfigureAwait(false);
+            var result = await _ticketRepository.CancelTicketAsync(request.TicketCommandToDomain(), cancellationToken).ConfigureAwait(false);
+
+            if (result == Guid.Empty)
+                throw new TicketNotCancelledException("The ticket can not be cancelled");
 
             return Unit.Value;
         }

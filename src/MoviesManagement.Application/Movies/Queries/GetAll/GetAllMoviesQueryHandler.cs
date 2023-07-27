@@ -16,7 +16,7 @@ namespace MoviesManagement.Application.Movies.Queries.GetAll
 
         public async Task<IQueryable<Movie>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
         {
-            var movies = await _movieRepository.GetAllAsync().ConfigureAwait(false);
+            var movies = await _movieRepository.GetAllAsync(cancellationToken).ConfigureAwait(false);
 
             if (movies is null)
                 throw new MoviesNotFoundException("Movies not found in database");

@@ -63,37 +63,37 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
             // Create movie.
             _movieRepository
-                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _successMovieCommand.Name)))
+                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _successMovieCommand.Name), default))
                 .ReturnsAsync(successGuid);
 
             _movieRepository
-                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _failedMovieCommand.Name)))
+                .Setup(x => x.CreateAsync(It.Is<Movie>(movie => movie.Name == _failedMovieCommand.Name), default))
                 .ReturnsAsync(Guid.Empty);
 
             // Update movie.
             _movieRepository
-                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _successMovieCommand.Name)))
+                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _successMovieCommand.Name), default))
                 .ReturnsAsync(successGuid);
 
             _movieRepository
-                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _failedMovieCommand.Name)))
+                .Setup(x => x.UpdateAsync(It.Is<Movie>(movie => movie.Name == _failedMovieCommand.Name), default))
                 .ReturnsAsync(Guid.Empty);
 
             // Delete movie.
             _movieRepository
-                .Setup(x => x.DeleteAsync(It.Is<Guid>(guid => guid == successGuid)))
+                .Setup(x => x.DeleteAsync(It.Is<Guid>(guid => guid == successGuid), default))
                 .ReturnsAsync(successGuid);
 
             _movieRepository
-                .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == failedGuid)))
+                .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == failedGuid), default))
                 .ReturnsAsync(Guid.Empty);
 
             _movieRepository
-                .Setup(x => x.GetAsync(It.Is<Guid>(x => x == failedGuid)))
+                .Setup(x => x.GetAsync(It.Is<Guid>(x => x == failedGuid), default))
                 .ReturnsAsync((Movie)default!);
 
             _movieRepository
-                .Setup(x => x.GetAsync(It.Is<Guid>(guid => guid == successGuid)))
+                .Setup(x => x.GetAsync(It.Is<Guid>(guid => guid == successGuid), default))
                 .ReturnsAsync(_successMovie);
 
             #endregion

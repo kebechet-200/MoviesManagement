@@ -64,7 +64,10 @@ namespace MoviesManagement.Application.Tickets.Commands.Reserve
             if (movieTickets.Any(x => x.State == TicketEnum.Reserve))
                 throw new YouAlreadyReserverTicketException("You already reserve the ticket of this movie");
 
-            await _ticketRepository.ReserveTicketAsync(request.TicketCommandToDomain()).ConfigureAwait(false);
+            var result = await _ticketRepository.ReserveTicketAsync(request.TicketCommandToDomain(), cancellationToken).ConfigureAwait(false);
+
+            if (result == Guid.Empty)
+                throw new TicketNotReservedException("The ticket can not be reserved");
 
             return Unit.Value;
         }

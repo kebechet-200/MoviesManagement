@@ -57,9 +57,10 @@ namespace MoviesManagement.Application.Tickets.Commands.Buy
             if (movieTickets.Any(x => x.State == TicketEnum.Buy))
                 throw new YouAlreadyBoughtTicketException("You already bought the ticket");
 
-            //TODO : ეს მიდგომა არ მომწონს, ვერ ვიგებ იყიდა ბილეთი თუ ექსეფშენი ისროლა try/catch ან logging (უმჯობესია ორივე)
-            await _ticketRepository.BuyTicketAsync(request.TicketCommandToDomain()).ConfigureAwait(false);
+            var result = await _ticketRepository.BuyTicketAsync(request.TicketCommandToDomain(), cancellationToken).ConfigureAwait(false);
 
+            if (result == Guid.Empty)
+                throw new TicketNotBoughtException("The ticket can not be bought");
             return Unit.Value;
         }
     }

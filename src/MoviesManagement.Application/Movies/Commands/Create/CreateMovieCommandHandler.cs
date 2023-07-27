@@ -21,12 +21,12 @@ namespace MoviesManagement.Application.Movies.Commands.Create
 
         public async Task<Unit> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
         {
-            var validationResult = await _validator.ValidateAsync(request).ConfigureAwait(false);
+            var validationResult = await _validator.ValidateAsync(request, cancellationToken).ConfigureAwait(false);
 
             if (validationResult.IsValid is false)
                 throw new ValidationException(validationResult.Errors.FirstOrDefault()?.ToString());
 
-            var result = await _movieRepository.CreateAsync(request.ToMovieDomainModel()).ConfigureAwait(false);
+            var result = await _movieRepository.CreateAsync(request.ToMovieDomainModel(), cancellationToken).ConfigureAwait(false);
 
             if (result == Guid.Empty)
                 throw new MovieCannotBeAddedException(ErrorMessages.MovieCannotBeAdded);

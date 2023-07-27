@@ -4,11 +4,12 @@ namespace MoviesManagement.Application.Contracts;
 
 public interface IUserRepository
 {
-    Task<User> GetAsync(Guid id);
-    Task<IQueryable<User>> GetAllAsync();
-    Task<Guid> AddAsync(User user);
-    Task<Guid> UpdateAsync(User user);
-    Task<Guid> DeleteAsync(Guid guid);
+    Task<Guid> AddAsync(User user, CancellationToken cancellationToken);
+    Task<Guid> UpdateAsync(User user, CancellationToken cancellationToken);
+    Task<Guid> DeleteAsync(Guid guid, CancellationToken cancellationToken);
+
+    Task<User> GetAsync(Guid id, CancellationToken cancellationToken);
+    Task<IQueryable<User>> GetAllAsync(CancellationToken cancellationToken);
 
     Task<bool> ExistsAsync(string username, CancellationToken cancellationToken);
     Task<Guid> ValidateAsync(User user, CancellationToken cancellationToken);

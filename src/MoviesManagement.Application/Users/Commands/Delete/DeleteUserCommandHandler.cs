@@ -19,7 +19,7 @@ namespace MoviesManagement.Application.Users.Commands.Delete
             if (request.Id == Guid.Empty)
                 throw new MoviesNotFoundException($"User id is empty");
 
-            var result = await _userRepository.DeleteAsync(request.Id).ConfigureAwait(false);
+            var result = await _userRepository.DeleteAsync(request.Id, cancellationToken).ConfigureAwait(false);
 
             if (result == Guid.Empty)
                 throw new MovieCannotBeUpdatedException("The movie can not be updated");

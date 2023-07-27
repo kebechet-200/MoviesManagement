@@ -19,7 +19,7 @@ namespace MoviesManagement.Application.Movies.Commands.Delete
             if (request.Id == Guid.Empty)
                 throw new MovieIdIsEmptyException(ErrorMessages.MovieIdIsEmpty);
 
-            var result = await _movieRepository.DeleteAsync(request.Id).ConfigureAwait(false);
+            var result = await _movieRepository.DeleteAsync(request.Id, cancellationToken).ConfigureAwait(false);
 
             if (result == Guid.Empty)
                 throw new MovieCannotBeDeletedException(ErrorMessages.MovieCannotBeDeleted);

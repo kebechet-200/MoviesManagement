@@ -4,10 +4,10 @@ namespace MoviesManagement.Application.Contracts;
 
 public interface IMovieRepository
 {
-    Task<Guid> CreateAsync(Movie movie);
-    Task<Guid> UpdateAsync(Movie movie);
-    Task<Guid> DeleteAsync(Guid guid);
+    Task<Guid> CreateAsync(Movie movie, CancellationToken cancellationToken);
+    Task<Guid> UpdateAsync(Movie movie, CancellationToken cancellationToken);
+    Task<Guid> DeleteAsync(Guid guid, CancellationToken cancellationToken);
 
-    Task<IQueryable<Movie>> GetAllAsync();
-    Task<Movie> GetAsync(Guid guid);
+    Task<IQueryable<Movie>> GetAllAsync(CancellationToken cancellationToken);
+    Task<Movie> GetAsync(Guid guid, CancellationToken cancellationToken);
 }
