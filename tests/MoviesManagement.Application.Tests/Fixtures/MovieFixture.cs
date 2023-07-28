@@ -7,6 +7,7 @@ using MoviesManagement.Application.Movies.Commands.Update;
 using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Domain.POCO;
 using MoviesManagement.Application.Movies.Queries.Get;
+using MoviesManagement.Application.Movies.Queries.GetAll;
 
 namespace MoviesManagement.Application.Tests.Fixtures
 {
@@ -55,6 +56,16 @@ namespace MoviesManagement.Application.Tests.Fixtures
             }
         }
 
+        public GetAllMoviesQueryHandler GetAllMoviesQueryHandler
+        {
+            get
+            {
+                ServiceProvider serviceProvider = ServiceCollection.BuildServiceProvider();
+                GetAllMoviesQueryHandler? service = serviceProvider.GetService<GetAllMoviesQueryHandler>()!;
+                return service;
+            }
+        }
+
         public MovieFixture()
         {
             var successGuid = new Guid("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
@@ -96,6 +107,10 @@ namespace MoviesManagement.Application.Tests.Fixtures
                 .Setup(x => x.GetAsync(It.Is<Guid>(guid => guid == successGuid), default))
                 .ReturnsAsync(_successMovie);
 
+            _movieRepository
+                .Setup(x => x.GetAllAsync(default))
+                .ReturnsAsync(_successMovies.AsQueryable());
+
             #endregion
 
             #region Add transient services
@@ -113,6 +128,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<UpdateMovieCommandHandler>();
             _ = ServiceCollection.AddTransient<DeleteMovieCommandHandler>();
             _ = ServiceCollection.AddTransient<GetMovieQueryHandler>();
+            _ = ServiceCollection.AddTransient<GetAllMoviesQueryHandler>();
 
             // Add validator
             _ = ServiceCollection.AddTransient<MovieValidator<CreateMovieCommand>>();
@@ -129,7 +145,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
             Name = "failed"
         };
 
-        private Movie _successMovie = new Movie
+        private static Movie _successMovie = new Movie
         {
             Description = "testdescription",
             Image = "testimage",
@@ -138,5 +154,12 @@ namespace MoviesManagement.Application.Tests.Fixtures
             Name = "success",
             StartDate = DateTime.UtcNow.AddHours(1)
         };
+
+        private List<Movie> _successMovies = new()
+        {
+            _successMovie,
+            new Movie() {Description = "test", Image = "test", Name = "test", StartDate = DateTime.UtcNow},
+        };
+        
     }
 }
