@@ -32,8 +32,8 @@ namespace MoviesManagement.Application.Tickets.Commands.Reserve
             if (request.State is not TicketEnum.Reserve)
                 throw new InvalidStateException("Ticket status is not Reserve");
 
-            var user = await _userRepository.GetAsync(request.UserId).ConfigureAwait(false);
-            var movie = await _movieRepository.GetAsync(request.MovieId).ConfigureAwait(false);
+            var user = await _userRepository.GetAsync(request.UserId, cancellationToken).ConfigureAwait(false);
+            var movie = await _movieRepository.GetAsync(request.MovieId, cancellationToken).ConfigureAwait(false);
 
             if (user is null)
                 throw new UserDoesNotExistException($"User with an id {request.UserId} does not exist in the database");
