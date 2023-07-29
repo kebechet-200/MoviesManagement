@@ -1,11 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using MoviesManagement.Application.Common.Models;
+using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Contracts;
+using MoviesManagement.Application.Movies.Commands.Create;
+using MoviesManagement.Application.Movies.Commands.Delete;
+using MoviesManagement.Application.Movies.Commands.Update;
+using MoviesManagement.Application.Movies.Queries.Get;
+using MoviesManagement.Application.Movies.Queries.GetAll;
 using MoviesManagement.Application.Users.Commands.Create;
 using MoviesManagement.Application.Users.Commands.Delete;
 using MoviesManagement.Application.Users.Commands.Update;
 using MoviesManagement.Application.Users.Queries.Get;
 using MoviesManagement.Application.Users.Queries.GetAll;
+using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Tests.Fixtures
 {
@@ -66,8 +74,106 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
         public UserFixture()
         {
-            
+            var successGuid = new Guid("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
+            var failedGuid = new Guid("{CF1A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
+
+            #region User repository mocks
+
+            // User exists
+            _userRepository
+                .Setup(x => x.ExistsAsync(It.Is<string>(x => x == _successUser.Username), default))
+                .ReturnsAsync(true);
+
+            _userRepository
+                .Setup(x => x.ExistsAsync(It.Is<string>(x => x == _failedUser.Username), default))
+                .ReturnsAsync(false);
+
+            // Add user
+            _userRepository
+                .Setup(x => x.AddAsync(It.Is<User>(x => x.Username == _successUser.Username && x.Password == _successUser.Password), default))
+                .ReturnsAsync(successGuid);
+
+            _userRepository
+                .Setup(x => x.AddAsync(It.Is<User>(x => x.Username == _failedUser.Username && x.Password == _failedUser.Password), default))
+                .ReturnsAsync(Guid.Empty);
+
+            // Update user
+            _userRepository
+                .Setup(x => x.UpdateAsync(It.Is<User>(x => x.Username == _successUser.Username && x.Password == _successUser.Password), default))
+                .ReturnsAsync(successGuid);
+
+            _userRepository
+                .Setup(x => x.UpdateAsync(It.Is<User>(x => x.Username == _failedUser.Username && x.Password == _failedUser.Password), default))
+                .ReturnsAsync(Guid.Empty);
+
+            // Delete user
+            _userRepository
+                .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == successGuid), default))
+                .ReturnsAsync(successGuid);
+
+            _userRepository
+                .Setup(x => x.DeleteAsync(It.Is<Guid>(x => x == failedGuid), default))
+                .ReturnsAsync(Guid.Empty);
+
+            // Get user
+            _userRepository
+                .Setup(x => x.GetAsync(It.Is<Guid>(guid => guid == successGuid), default))
+                .ReturnsAsync(_succeedDomainUser);
+
+            _userRepository
+                .Setup(x => x.GetAsync(It.Is<Guid>(x => x == failedGuid), default))
+                .ReturnsAsync((User)default!);
+
+            _userRepository
+                .Setup(x => x.GetAllAsync(default))
+                .ReturnsAsync(_successMovies.AsQueryable());
+            #endregion
+
+            #region Add transient services
+            AddServices();
+            #endregion
         }
 
+        private void AddServices()
+        {
+            // Add repository mocks
+            _ = ServiceCollection.AddTransient(_ => _userRepository.Object);
+
+            // Add handlers
+            _ = ServiceCollection.AddTransient<CreateUserCommandHandler>();
+            _ = ServiceCollection.AddTransient<UpdateUserCommandHandler>();
+            _ = ServiceCollection.AddTransient<DeleteUserCommandHandler>();
+
+            _ = ServiceCollection.AddTransient<GetUserQueryHandler>();
+            _ = ServiceCollection.AddTransient<GetAllMoviesQueryHandler>();
+
+            // Add validator
+            _ = ServiceCollection.AddTransient<UserValidator<CreateUserCommand>>();
+            _ = ServiceCollection.AddTransient<UserValidator<UpdateUserCommand>>();
+        }
+
+        private readonly BaseUserModel _successUser = new()
+        {
+            Username = "success",
+            Password = "successpassword"
+        };
+
+        private readonly BaseUserModel _failedUser = new()
+        {
+            Username = "failed",
+            Password = "failedpassword"
+        };
+
+        private static readonly User _succeedDomainUser = new()
+        {
+            Username = "succeeduser",
+            Password = "succeedpassword"
+        };
+
+        private readonly List<User> _successMovies = new()
+        {
+            _succeedDomainUser,
+            new User() { Username = "test", Password = "test" }
+        };
     }
 }

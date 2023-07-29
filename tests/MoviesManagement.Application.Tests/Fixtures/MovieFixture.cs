@@ -8,6 +8,7 @@ using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Domain.POCO;
 using MoviesManagement.Application.Movies.Queries.Get;
 using MoviesManagement.Application.Movies.Queries.GetAll;
+using MoviesManagement.Application.Common.Models;
 
 namespace MoviesManagement.Application.Tests.Fixtures
 {
@@ -70,7 +71,8 @@ namespace MoviesManagement.Application.Tests.Fixtures
         {
             var successGuid = new Guid("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
             var failedGuid = new Guid("{CF1A8C1C-F2D0-41A1-A12C-53D9BE513A1C}");
-            #region Movie command handler mocks
+            
+            #region Movie repository mocks
 
             // Create movie.
             _movieRepository
@@ -127,6 +129,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<CreateMovieCommandHandler>();
             _ = ServiceCollection.AddTransient<UpdateMovieCommandHandler>();
             _ = ServiceCollection.AddTransient<DeleteMovieCommandHandler>();
+
             _ = ServiceCollection.AddTransient<GetMovieQueryHandler>();
             _ = ServiceCollection.AddTransient<GetAllMoviesQueryHandler>();
 
@@ -135,12 +138,12 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<MovieValidator<UpdateMovieCommand>>();
         }
 
-        private CreateMovieCommand _successMovieCommand = new CreateMovieCommand
+        private readonly BaseMovieModel _successMovieCommand = new()
         {
             Name = "success"
         };
 
-        private CreateMovieCommand _failedMovieCommand = new CreateMovieCommand
+        private readonly BaseMovieModel _failedMovieCommand = new ()
         {
             Name = "failed"
         };
