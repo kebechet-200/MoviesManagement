@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoviesManagement.Application.Movies.Queries.Get;
 using MoviesManagement.Application.Movies.Queries.GetAll;
@@ -14,6 +15,7 @@ using System.Net;
 
 namespace MoviesManagement.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TicketsController : ControllerBase
