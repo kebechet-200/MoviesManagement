@@ -1,5 +1,4 @@
-﻿using MoviesManagement.Application.Tickets.Commands.Buy;
-using MoviesManagement.Domain.Common.Enum;
+﻿using MoviesManagement.Domain.Common.Enum;
 
 namespace MoviesManagement.Application.Common.Models
 {
