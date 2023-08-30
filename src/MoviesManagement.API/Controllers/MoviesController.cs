@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoviesManagement.Application.Movies.Commands.Create;
 using MoviesManagement.Application.Movies.Commands.Delete;
@@ -9,6 +10,7 @@ using System.Net;
 
 namespace MoviesManagement.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase

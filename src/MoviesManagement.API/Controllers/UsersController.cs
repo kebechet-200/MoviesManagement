@@ -1,14 +1,16 @@
-﻿using MediatR;
+﻿using System.Net;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MoviesManagement.Application.Users.Commands.Create;
 using MoviesManagement.Application.Users.Commands.Delete;
 using MoviesManagement.Application.Users.Commands.Update;
 using MoviesManagement.Application.Users.Queries.Get;
 using MoviesManagement.Application.Users.Queries.GetAll;
-using System.Net;
 
 namespace MoviesManagement.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
