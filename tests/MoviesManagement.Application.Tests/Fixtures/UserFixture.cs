@@ -122,7 +122,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
             _userRepository
                 .Setup(x => x.GetAllAsync(default))
-                .ReturnsAsync(_successMovies.AsQueryable());
+                .ReturnsAsync(_successUsers.AsQueryable());
             #endregion
 
             #region Add transient services
@@ -166,7 +166,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
             Password = "succeedpassword"
         };
 
-        private readonly List<User> _successMovies = new()
+        private readonly List<User> _successUsers = new()
         {
             _succeedDomainUser,
             new User() { Username = "test", Password = "test" }

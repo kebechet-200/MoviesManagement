@@ -6,7 +6,7 @@ namespace MoviesManagement.Application.Common.Extensions
 {
     internal static class ValidateUserExtension
     {
-        private static UserValidator _validator;
+        private static UserValidator<BaseUserModel> _validator;
         static ValidateUserExtension()
         {
             _validator = new();
