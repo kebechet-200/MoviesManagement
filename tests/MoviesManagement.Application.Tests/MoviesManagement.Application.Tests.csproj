@@ -25,8 +25,6 @@
   <ItemGroup>
     <Folder Include="Tickets\Commands\" />
     <Folder Include="Tickets\Queries\" />
-    <Folder Include="Users\Commands\" />
-    <Folder Include="Users\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -1,14 +1,14 @@
 ﻿using Moq;
 using Microsoft.Extensions.DependencyInjection;
 using MoviesManagement.Application.Contracts;
+using MoviesManagement.Application.Common.Models;
+using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Movies.Commands.Create;
 using MoviesManagement.Application.Movies.Commands.Delete;
 using MoviesManagement.Application.Movies.Commands.Update;
-using MoviesManagement.Application.Common.Validators;
-using MoviesManagement.Domain.POCO;
 using MoviesManagement.Application.Movies.Queries.Get;
 using MoviesManagement.Application.Movies.Queries.GetAll;
-using MoviesManagement.Application.Common.Models;
+using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Tests.Fixtures
 {
