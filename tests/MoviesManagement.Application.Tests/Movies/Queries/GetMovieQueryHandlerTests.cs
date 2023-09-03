@@ -1,11 +1,8 @@
 ﻿using FluentAssertions;
-using MediatR;
 using MoviesManagement.Application.Common;
-using MoviesManagement.Application.Movies.Commands.Delete;
 using MoviesManagement.Application.Movies.Queries.Get;
 using MoviesManagement.Application.Tests.Fixtures;
 using MoviesManagement.Domain.Common.Exceptions;
-using MoviesManagement.Domain.POCO;
 using Xunit;
 
 namespace MoviesManagement.Application.Tests.Movies.Queries
@@ -62,7 +59,7 @@ namespace MoviesManagement.Application.Tests.Movies.Queries
             Exception exception = default!;
             GetMovieQueryHandler handler = _fixture.GetMovieQueryHandler;
             //TODO : that's wrong commands should have it's own models
-            Movie result = default!;
+            GetMovieResponse result = default!;
 
             try
             {
@@ -82,14 +79,5 @@ namespace MoviesManagement.Application.Tests.Movies.Queries
         private GetMovieQuery _movieWithEmptyId = new GetMovieQuery { Id = Guid.Empty };
         private GetMovieQuery _movieWithSuccessGuid = new GetMovieQuery { Id = new ("{CF0A8C1C-F2D0-41A1-A12C-53D9BE513A1C}") };
         private GetMovieQuery _movieWithFailedGuid = new GetMovieQuery { Id = new("{CF1A8C1C-F2D0-41A1-A12C-53D9BE513A1C}") };
-        private Movie _successMovie = new Movie
-        {
-            Description = "testdescription",
-            Image = "testimage",
-            IsActive = true,
-            IsExpired = false,
-            Name = "success",
-            StartDate = DateTime.UtcNow.AddHours(1)
-        };
     }
 }

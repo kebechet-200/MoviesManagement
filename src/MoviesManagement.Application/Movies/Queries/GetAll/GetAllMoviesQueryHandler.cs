@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using MoviesManagement.Application.Contracts;
+using MoviesManagement.Application.Movies.Queries.Get;
 using MoviesManagement.Domain.Common.Exceptions;
 using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Movies.Queries.GetAll
 {
-    public class GetAllMoviesQueryHandler : IRequestHandler<GetAllMoviesQuery, IQueryable<Movie>>
+    public class GetAllMoviesQueryHandler : IRequestHandler<GetAllMoviesQuery, List<GetMovieResponse>>
     {
         private readonly IMovieRepository _movieRepository;
 
@@ -14,14 +15,14 @@ namespace MoviesManagement.Application.Movies.Queries.GetAll
             _movieRepository = movieRepository;
         }
 
-        public async Task<IQueryable<Movie>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetMovieResponse>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
         {
             var movies = await _movieRepository.GetAllAsync(cancellationToken).ConfigureAwait(false);
 
             if (movies is null)
                 throw new MoviesNotFoundException("Movies not found in database");
 
-            return movies;
+            return movies.DomainToResponseModel();
         }
     }
 }

@@ -138,12 +138,12 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<MovieValidator<UpdateMovieCommand>>();
         }
 
-        private readonly BaseMovieModel _successMovieCommand = new()
+        private readonly BaseMovieCommand _successMovieCommand = new()
         {
             Name = "success"
         };
 
-        private readonly BaseMovieModel _failedMovieCommand = new ()
+        private readonly BaseMovieCommand _failedMovieCommand = new ()
         {
             Name = "failed"
         };

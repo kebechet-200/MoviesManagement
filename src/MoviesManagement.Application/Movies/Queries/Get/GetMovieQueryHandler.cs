@@ -1,12 +1,11 @@
 ﻿using MediatR;
+using MoviesManagement.Domain.Common.Exceptions;
 using MoviesManagement.Application.Common;
 using MoviesManagement.Application.Contracts;
-using MoviesManagement.Domain.Common.Exceptions;
-using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Movies.Queries.Get
 {
-    public class GetMovieQueryHandler : IRequestHandler<GetMovieQuery, Movie>
+    public class GetMovieQueryHandler : IRequestHandler<GetMovieQuery, GetMovieResponse>
     {
         private readonly IMovieRepository _movieRepository;
 
@@ -15,7 +14,7 @@ namespace MoviesManagement.Application.Movies.Queries.Get
             _movieRepository = movieRepository;
         }
 
-        public async Task<Movie> Handle(GetMovieQuery request, CancellationToken cancellationToken)
+        public async Task<GetMovieResponse> Handle(GetMovieQuery request, CancellationToken cancellationToken)
         {
             if (request.Id == Guid.Empty)
                 throw new MovieIdIsEmptyException(ErrorMessages.MovieIdIsEmpty);
@@ -25,7 +24,7 @@ namespace MoviesManagement.Application.Movies.Queries.Get
             if (movie is null)
                 throw new MoviesNotFoundException(ErrorMessages.MovieNotFound);
 
-            return movie;
+            return movie.DomainToResponseModel();
         }
     }
 }

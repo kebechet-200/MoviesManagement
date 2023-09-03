@@ -1,8 +1,9 @@
-﻿using MoviesManagement.Domain.POCO;
+﻿using MoviesManagement.Application.Common.Extensions;
+using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Common.Models
 {
-    public class BaseMovieModel
+    public class BaseMovieCommand
     {
         public string Name { get; init; } = string.Empty;
         public string Image { get; init; } = string.Empty;
@@ -14,7 +15,7 @@ namespace MoviesManagement.Application.Common.Models
 
     public static class MovieExtensions
     {
-        public static Movie ToMovieDomainModel(this BaseMovieModel movie)
+        internal static Movie ToMovieDomainModel(this BaseMovieCommand movie)
         {
             return new Movie
             {
@@ -24,6 +25,15 @@ namespace MoviesManagement.Application.Common.Models
                 StartDate = movie.StartDate,
                 IsActive = movie.IsActive,
                 IsExpired = movie.IsExpired
+            };
+        }
+
+        internal static User CreateUserModel(this BaseUserCommand request)
+        {
+            return new User
+            {
+                Username = request.Username,
+                Password = EncryptPasswordExtension.Encrypt(request.Password)
             };
         }
     }

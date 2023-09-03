@@ -1,4 +1,5 @@
-﻿using MoviesManagement.Domain.POCO;
+﻿using MoviesManagement.Application.Movies.Queries.Get;
+using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Contracts;
 

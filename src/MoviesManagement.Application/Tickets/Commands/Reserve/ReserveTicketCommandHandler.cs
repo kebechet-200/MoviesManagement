@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MoviesManagement.Application.Common.Extensions;
+using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Contracts;
 using MoviesManagement.Domain.Common.Enum;
 using MoviesManagement.Domain.Common.Exceptions;
@@ -64,7 +65,7 @@ namespace MoviesManagement.Application.Tickets.Commands.Reserve
             if (movieTickets.Any(x => x.State == TicketEnum.Reserve))
                 throw new YouAlreadyReserverTicketException("You already reserve the ticket of this movie");
 
-            var result = await _ticketRepository.ReserveTicketAsync(request.TicketCommandToDomain(), cancellationToken).ConfigureAwait(false);
+            var result = await _ticketRepository.ReserveTicketAsync(request.CommandToDomain(), cancellationToken).ConfigureAwait(false);
 
             if (result == Guid.Empty)
                 throw new TicketNotReservedException("The ticket can not be reserved");
