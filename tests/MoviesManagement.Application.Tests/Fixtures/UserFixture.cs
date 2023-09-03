@@ -78,11 +78,11 @@ namespace MoviesManagement.Application.Tests.Fixtures
             // User exists
             _userRepository
                 .Setup(x => x.ExistsAsync(It.Is<string>(x => x == _successUser.Username), default))
-                .ReturnsAsync(true);
+                .ReturnsAsync(false);
 
             _userRepository
                 .Setup(x => x.ExistsAsync(It.Is<string>(x => x == _failedUser.Username), default))
-                .ReturnsAsync(false);
+                .ReturnsAsync(true);
 
             // Add user
             _userRepository
@@ -150,13 +150,13 @@ namespace MoviesManagement.Application.Tests.Fixtures
 
         private readonly BaseUserCommand _successUser = new()
         {
-            Username = "success",
+            Username = "succeeduser",
             Password = "successpassword"
         };
 
         private readonly BaseUserCommand _failedUser = new()
         {
-            Username = "failed",
+            Username = "faileduser",
             Password = "failedpassword"
         };
 
