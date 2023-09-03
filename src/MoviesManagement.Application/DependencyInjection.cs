@@ -6,15 +6,15 @@ namespace MoviesManagement.Application
 {
     public static class DependencyInjection
     {
-        private static readonly string _assemblyName = nameof(DependencyInjection);
+        private static readonly Assembly _assembly = typeof(DependencyInjection).Assembly;
 
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(
-                x => x.RegisterServicesFromAssembly(Assembly.Load(_assemblyName))
+                x => x.RegisterServicesFromAssembly(_assembly)
             );
 
-            services.AddValidatorsFromAssembly(Assembly.Load(_assemblyName));
+            services.AddValidatorsFromAssembly(_assembly);
 
             return services;
         }

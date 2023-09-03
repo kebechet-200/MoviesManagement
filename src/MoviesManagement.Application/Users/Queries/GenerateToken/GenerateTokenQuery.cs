@@ -4,5 +4,5 @@ using MoviesManagement.Application.Common.Models;
 
 namespace MoviesManagement.Application.Users.Queries.GenerateToken
 {
-    public class GenerateTokenQuery : BaseUserModel, IRequest<string> { };
+    public class GenerateTokenQuery : BaseUserCommand, IRequest<string> { };
 }

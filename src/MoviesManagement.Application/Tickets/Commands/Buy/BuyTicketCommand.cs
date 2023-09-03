@@ -4,5 +4,5 @@ using MoviesManagement.Domain.Common.Enum;
 
 namespace MoviesManagement.Application.Tickets.Commands.Buy
 {
-    public class BuyTicketCommand : BaseTicketModel, IRequest<Unit> { }
+    public class BuyTicketCommand : BaseTicketCommand, IRequest<Unit> { }
 }

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MoviesManagement.Application.Common.Extensions;
+using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Contracts;
 using MoviesManagement.Domain.Common.Enum;
 using MoviesManagement.Domain.Common.Exceptions;
@@ -57,7 +57,7 @@ namespace MoviesManagement.Application.Tickets.Commands.Buy
             if (movieTickets.Any(x => x.State == TicketEnum.Buy))
                 throw new YouAlreadyBoughtTicketException("You already bought the ticket");
 
-            var result = await _ticketRepository.BuyTicketAsync(request.TicketCommandToDomain(), cancellationToken).ConfigureAwait(false);
+            var result = await _ticketRepository.BuyTicketAsync(request.CommandToDomain(), cancellationToken).ConfigureAwait(false);
 
             if (result == Guid.Empty)
                 throw new TicketNotBoughtException("The ticket can not be bought");

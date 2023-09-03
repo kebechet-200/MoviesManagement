@@ -1,18 +1,18 @@
-﻿using MoviesManagement.Application.Common.Models;
+﻿using MoviesManagement.Domain.Common.Exceptions;
+using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Common.Validators;
-using MoviesManagement.Domain.Common.Exceptions;
 
 namespace MoviesManagement.Application.Common.Extensions
 {
     internal static class ValidateUserExtension
     {
-        private static UserValidator<BaseUserModel> _validator;
+        private static UserValidator<BaseUserCommand> _validator;
         static ValidateUserExtension()
         {
             _validator = new();
         }
 
-        internal static async Task ValidateQuery(BaseUserModel request, CancellationToken cancellationToken)
+        internal static async Task ValidateQuery(BaseUserCommand request, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
                 throw new OperationCanceledException("Operation cancelled");

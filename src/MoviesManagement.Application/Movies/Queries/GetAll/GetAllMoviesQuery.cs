@@ -4,5 +4,5 @@ using MoviesManagement.Domain.POCO;
 
 namespace MoviesManagement.Application.Movies.Queries.GetAll
 {
-    public class GetAllMoviesQuery : IRequest<List<GetMovieResponseModel>> { }
+    public class GetAllMoviesQuery : IRequest<List<GetMovieResponse>> { }
 }

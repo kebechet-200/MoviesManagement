@@ -2,12 +2,12 @@
 using Microsoft.Extensions.Logging;
 using MoviesManagement.Application.Common.Extensions;
 using MoviesManagement.Application.Contracts;
-using MoviesManagement.Application.Common;
 using MoviesManagement.Domain.Common.Exceptions;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using MoviesManagement.Application.Common.Models;
 
 namespace MoviesManagement.Application.Users.Queries.GenerateToken
 {
@@ -35,9 +35,7 @@ namespace MoviesManagement.Application.Users.Queries.GenerateToken
                 if (userExists is false)
                     throw new UserDoesNotExistException($"The user with name {request.Username} does not exist");
 
-                var user = CreateUserExtension.CreateUserModel(request);
-
-                Guid userId = await _userRepository.ValidateAsync(user, cancellationToken);
+                Guid userId = await _userRepository.ValidateAsync(request.CreateUserModel(), cancellationToken);
 
                 if (userId == Guid.Empty)
                     throw new InvalidUserException($"Username or password is invalid");

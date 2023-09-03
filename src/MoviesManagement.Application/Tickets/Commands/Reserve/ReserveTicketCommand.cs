@@ -3,5 +3,5 @@ using MoviesManagement.Application.Common.Models;
 
 namespace MoviesManagement.Application.Tickets.Commands.Reserve
 {
-    public class ReserveTicketCommand : BaseTicketModel, IRequest<Unit> { }
+    public class ReserveTicketCommand : BaseTicketCommand, IRequest<Unit> { }
 }

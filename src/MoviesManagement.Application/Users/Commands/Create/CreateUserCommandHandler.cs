@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MoviesManagement.Application.Common.Extensions;
+using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Contracts;
 using MoviesManagement.Domain.Common.Exceptions;
 
@@ -23,9 +24,7 @@ namespace MoviesManagement.Application.Users.Commands.Create
             if (userExists)
                 throw new UserAlreadyExistsException($"User with name {request.Username} already exsits");
 
-            var user = CreateUserExtension.CreateUserModel(request);
-
-            var userResponse = await _userRepository.AddAsync(user, cancellationToken).ConfigureAwait(false);
+            var userResponse = await _userRepository.AddAsync(request.CreateUserModel(), cancellationToken).ConfigureAwait(false);
 
             if (userResponse == Guid.Empty)
                 throw new UserNotRegisteredException("There was some problem while adding the user, try again later");

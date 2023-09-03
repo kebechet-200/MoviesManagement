@@ -21,13 +21,10 @@ namespace MoviesManagement.Application.Tests.Movies.Queries
         {
             Exception exception = default!;
             GetAllMoviesQueryHandler handler = _fixture.GetAllMoviesQueryHandler;
-            //TODO : that's wrong commands should have it's own models
-            List<Movie> result = default!;
-
+            List<GetMovieResponse> movies = default!;
             try
             {
-                var movies = await handler.Handle(new(), CancellationToken.None);
-                result = movies.ToList();
+                movies = await handler.Handle(new(), CancellationToken.None);
             }
             catch (Exception ex)
             {
@@ -35,12 +32,12 @@ namespace MoviesManagement.Application.Tests.Movies.Queries
             }
 
             exception.Should().BeNull();
-            result[0].Description.Should().Be("testdescription");
-            result[0].Image.Should().Be("testimage");
-            result[0].Name.Should().Be("success");
-            result[1].Description.Should().Be("test");
-            result[1].Image.Should().Be("test");
-            result[1].Name.Should().Be("test");
+            movies[0].Description.Should().Be("testdescription");
+            movies[0].Image.Should().Be("testimage");
+            movies[0].Name.Should().Be("success");
+            movies[1].Description.Should().Be("test");
+            movies[1].Image.Should().Be("test");
+            movies[1].Name.Should().Be("test");
         }
     }
 }

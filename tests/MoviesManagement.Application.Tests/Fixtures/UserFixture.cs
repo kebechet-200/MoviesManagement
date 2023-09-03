@@ -148,13 +148,13 @@ namespace MoviesManagement.Application.Tests.Fixtures
             _ = ServiceCollection.AddTransient<UserValidator<UpdateUserCommand>>();
         }
 
-        private readonly BaseUserModel _successUser = new()
+        private readonly BaseUserCommand _successUser = new()
         {
             Username = "success",
             Password = "successpassword"
         };
 
-        private readonly BaseUserModel _failedUser = new()
+        private readonly BaseUserCommand _failedUser = new()
         {
             Username = "failed",
             Password = "failedpassword"
