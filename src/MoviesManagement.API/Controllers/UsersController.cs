@@ -1,23 +1,23 @@
-﻿using MediatR;
+﻿using System.Net;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MoviesManagement.Application.Movies.Commands.Create;
-using MoviesManagement.Application.Movies.Commands.Delete;
-using MoviesManagement.Application.Movies.Commands.Update;
-using MoviesManagement.Application.Movies.Queries.Get;
-using MoviesManagement.Application.Movies.Queries.GetAll;
-using System.Net;
+using MoviesManagement.Application.Users.Commands.Create;
+using MoviesManagement.Application.Users.Commands.Delete;
+using MoviesManagement.Application.Users.Commands.Update;
+using MoviesManagement.Application.Users.Queries.Get;
+using MoviesManagement.Application.Users.Queries.GetAll;
 
 namespace MoviesManagement.API.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public MoviesController(IMediator mediator)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -26,32 +26,32 @@ namespace MoviesManagement.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] CreateMovieCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command) => Ok(await _mediator.Send(command));
 
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Update([FromBody] UpdateMovieCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Update([FromBody] UpdateUserCommand command) => Ok(await _mediator.Send(command));
 
         [HttpDelete]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Delete([FromBody] DeleteMovieCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command) => Ok(await _mediator.Send(command));
 
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Get([FromRoute] GetMovieQuery query, CancellationToken cancellationToken) => Ok(await _mediator.Send(query, cancellationToken));
+        public async Task<IActionResult> Get([FromRoute] GetUserQuery query) => Ok(await _mediator.Send(query));
 
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> GetAll(GetAllMoviesQuery query, CancellationToken cancellationToken) => Ok(await _mediator.Send(query, cancellationToken)); // TODO Lasha : test if it works, because this endpoint needs no parameter.
+        public async Task<IActionResult> GetAll(GetAllUserQuery query) => Ok(await _mediator.Send(query));
     }
 }

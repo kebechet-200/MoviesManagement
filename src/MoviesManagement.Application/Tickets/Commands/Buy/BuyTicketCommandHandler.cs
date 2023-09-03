@@ -13,8 +13,8 @@ namespace MoviesManagement.Application.Tickets.Commands.Buy
         private readonly IUserRepository _userRepository;
 
         public BuyTicketCommandHandler(ITicketRepository ticketRepository,
-                                          IMovieRepository movieRepository,
-                                          IUserRepository userRepository)
+                                       IMovieRepository movieRepository,
+                                       IUserRepository userRepository)
         {
             _ticketRepository = ticketRepository;
             _movieRepository = movieRepository;
@@ -61,6 +61,7 @@ namespace MoviesManagement.Application.Tickets.Commands.Buy
 
             if (result == Guid.Empty)
                 throw new TicketNotBoughtException("The ticket can not be bought");
+
             return Unit.Value;
         }
     }
