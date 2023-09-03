@@ -88,6 +88,26 @@ namespace MoviesManagement.Application.Tests.Users.Commands
             exception.Message.Should().Be(expectedMessage);
         }
 
+        [Fact]
+        public async Task Handle_WhenUserAlreadyExistInDatabase_ShouldThrowException()
+        {
+            var _mediator = _userFixture.CreateUserCommandHandler;
+            Exception exception = default!;
+            CreateUserCommand command = new() { Username = "faileduser", Password = "11111111" };
+
+            try
+            {
+                _ = await _mediator.Handle(command, CancellationToken.None);
+            }
+            catch(Exception ex)
+            {
+                exception = ex;
+            }
+
+            exception.Should().NotBeNull().And.BeOfType<UserAlreadyExistsException>();
+            exception.Message.Should().Be($"User with name {command.Username} already exsits");
+        }
+
         #region TestData
         public static IEnumerable<object[]> EmptyUserData()
         {
