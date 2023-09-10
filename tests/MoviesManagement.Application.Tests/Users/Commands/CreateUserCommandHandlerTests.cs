@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using MediatR;
 using MoviesManagement.Application.Common;
 using MoviesManagement.Application.Tests.Fixtures;
 using MoviesManagement.Application.Users.Commands.Create;
@@ -93,11 +94,10 @@ namespace MoviesManagement.Application.Tests.Users.Commands
         {
             var _mediator = _userFixture.CreateUserCommandHandler;
             Exception exception = default!;
-            CreateUserCommand command = new() { Username = "faileduser", Password = "11111111" };
-
+            
             try
             {
-                _ = await _mediator.Handle(command, CancellationToken.None);
+                _ = await _mediator.Handle(_userAlreadyExists, CancellationToken.None);
             }
             catch(Exception ex)
             {
@@ -105,7 +105,47 @@ namespace MoviesManagement.Application.Tests.Users.Commands
             }
 
             exception.Should().NotBeNull().And.BeOfType<UserAlreadyExistsException>();
-            exception.Message.Should().Be($"User with name {command.Username} already exsits");
+            exception.Message.Should().Be($"User with name {_userAlreadyExists.Username} already exsits");
+        }
+
+        [Fact]
+        public async Task Handle_WhenUserCannotBeAdded_ShouldThrowException()
+        {
+            var _mediator = _userFixture.CreateUserCommandHandler;
+            Exception exception = default!;
+
+            try
+            {
+                _ = await _mediator.Handle(_failWhileAdd, CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
+
+            exception.Should().NotBeNull().And.BeOfType< UserNotRegisteredException>();
+            exception.Message.Should().Be($"There was some problem while adding the user, try again later");
+        }
+
+        [Fact]
+        public async Task Handle_WhenEverythingsCorrect_ShouldAddTheUser()
+        {
+            var _mediator = _userFixture.CreateUserCommandHandler;
+
+            Exception exception = default!;
+            Unit result;
+
+            try
+            {
+                result = await _mediator.Handle(_everythingSucceedCommand, CancellationToken.None);
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
+
+            exception.Should().BeNull();
+            result.Should().Be(Unit.Value).And.BeOfType(typeof(Unit));
         }
 
         #region TestData
@@ -127,6 +167,9 @@ namespace MoviesManagement.Application.Tests.Users.Commands
         private static CreateUserCommand _morePassword = new() { Username = "11111111", Password = "1111111111111111" };
         private static CreateUserCommand _lessUsername = new() { Username = "111", Password = "11111111" };
         private static CreateUserCommand _moreUsername = new() { Username = "1111111111111111", Password = "11111111" };
+        private static CreateUserCommand _everythingSucceedCommand = new() { Username = "succeeduser", Password = "successpassword" };
+        private static CreateUserCommand _failWhileAdd = new() { Username = "faileduser", Password = "failedpassword" };
+        private static CreateUserCommand _userAlreadyExists = new() { Username = "failed exist", Password = "11111111" };
         #endregion
     }   
 }
