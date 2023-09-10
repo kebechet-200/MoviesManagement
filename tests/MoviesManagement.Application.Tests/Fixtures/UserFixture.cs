@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using MoviesManagement.Application.Common.Extensions;
 using MoviesManagement.Application.Common.Models;
 using MoviesManagement.Application.Common.Validators;
 using MoviesManagement.Application.Contracts;
@@ -76,12 +77,9 @@ namespace MoviesManagement.Application.Tests.Fixtures
             #region User repository mocks
 
             // User exists
-            _userRepository
-                .Setup(x => x.ExistsAsync(It.Is<string>(x => x == _successUser.Username), default))
-                .ReturnsAsync(false);
 
             _userRepository
-                .Setup(x => x.ExistsAsync(It.Is<string>(x => x == _failedUser.Username), default))
+                .Setup(x => x.ExistsAsync(It.Is<string>(x => x == "failed exist"), default))
                 .ReturnsAsync(true);
 
             // Add user
@@ -151,7 +149,7 @@ namespace MoviesManagement.Application.Tests.Fixtures
         private readonly BaseUserCommand _successUser = new()
         {
             Username = "succeeduser",
-            Password = "successpassword"
+            Password = EncryptPasswordExtension.Encrypt("successpassword")
         };
 
         private readonly BaseUserCommand _failedUser = new()
