@@ -43,7 +43,7 @@ namespace MoviesManagement.API.Controllers
         public async Task<IActionResult> Delete([FromBody] DeleteMovieCommand command, CancellationToken cancellationToken) =>
             Ok(await _mediator.Send(command, cancellationToken));
 
-        [HttpGet("{id}")]
+        [HttpGet("{query.Id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
