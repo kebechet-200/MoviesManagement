@@ -31,32 +31,37 @@ namespace MoviesManagement.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] BuyTicketCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Create([FromBody] BuyTicketCommand command, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(command, cancellationToken));
 
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Update([FromBody] ReserveTicketCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Update([FromBody] ReserveTicketCommand command, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(command, cancellationToken));
 
         [HttpDelete]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Delete([FromBody] CancelTicketCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Delete([FromBody] CancelTicketCommand command, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(command, cancellationToken));
 
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Get([FromRoute] GetTicketQuery query, CancellationToken cancellationToken) => Ok(await _mediator.Send(query, cancellationToken));
+        public async Task<IActionResult> Get([FromRoute] GetTicketQuery query, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(query, cancellationToken));
 
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> GetAll(GetAllTicketQuery query, CancellationToken cancellationToken) => Ok(await _mediator.Send(query, cancellationToken));
+        public async Task<IActionResult> GetAll(GetAllTicketQuery query, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(query, cancellationToken));
     }
 }

@@ -26,32 +26,37 @@ namespace MoviesManagement.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] CreateMovieCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Create([FromBody] CreateMovieCommand command, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(command, cancellationToken));
 
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Update([FromBody] UpdateMovieCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Update([FromBody] UpdateMovieCommand command, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(command, cancellationToken));
 
         [HttpDelete]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Delete([FromBody] DeleteMovieCommand command, CancellationToken cancellationToken) => Ok(await _mediator.Send(command, cancellationToken));
+        public async Task<IActionResult> Delete([FromBody] DeleteMovieCommand command, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(command, cancellationToken));
 
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Get([FromRoute] GetMovieQuery query, CancellationToken cancellationToken) => Ok(await _mediator.Send(query, cancellationToken));
+        public async Task<IActionResult> Get([FromRoute] GetMovieQuery query, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(query, cancellationToken));
 
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> GetAll(GetAllMoviesQuery query, CancellationToken cancellationToken) => Ok(await _mediator.Send(query, cancellationToken)); // TODO Lasha : test if it works, because this endpoint needs no parameter.
+        public async Task<IActionResult> GetAll(GetAllMoviesQuery query, CancellationToken cancellationToken) =>
+            Ok(await _mediator.Send(query, cancellationToken));
     }
 }

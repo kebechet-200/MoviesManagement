@@ -26,32 +26,37 @@ namespace MoviesManagement.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Create([FromBody] CreateUserCommand command) => Ok(await _mediator.Send(command));
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command, CancellationToken token) =>
+            Ok(await _mediator.Send(command, token));
 
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Update([FromBody] UpdateUserCommand command) => Ok(await _mediator.Send(command));
+        public async Task<IActionResult> Update([FromBody] UpdateUserCommand command, CancellationToken token) =>
+            Ok(await _mediator.Send(command, token));
 
         [HttpDelete]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command) => Ok(await _mediator.Send(command));
+        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand command, CancellationToken token) => 
+            Ok(await _mediator.Send(command, token));
 
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Get([FromRoute] GetUserQuery query) => Ok(await _mediator.Send(query));
+        public async Task<IActionResult> Get([FromRoute] GetUserQuery query, CancellationToken token) =>
+            Ok(await _mediator.Send(query, token));
 
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> GetAll(GetAllUserQuery query) => Ok(await _mediator.Send(query));
+        public async Task<IActionResult> GetAll(GetAllUserQuery query, CancellationToken token) =>
+            Ok(await _mediator.Send(query, token));
     }
 }
