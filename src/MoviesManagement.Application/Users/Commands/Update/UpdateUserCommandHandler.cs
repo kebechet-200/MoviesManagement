@@ -20,8 +20,8 @@ namespace MoviesManagement.Application.Users.Commands.Update
 
             var userExists = await _userRepository.ExistsAsync(request.Username, cancellationToken).ConfigureAwait(false);
 
-            if (userExists)
-                throw new UserAlreadyExistsException($"User with name {request.Username} already exsits");
+            if (userExists is false)
+                throw new UserDoesNotExistException($"User does not exist in the database.");
 
             var updatedUser =  await _userRepository.UpdateAsync(request.CreateUserModel(), cancellationToken).ConfigureAwait(false);
 

@@ -1,10 +1,10 @@
 ﻿namespace MoviesManagement.Domain.Common.Exceptions
 {
-    public class YouAlreadyReserverTicketException : Exception
+    public class YouAlreadyReservedTicketException : Exception
     {
-        public const string Code = nameof(YouAlreadyReserverTicketException);
+        public const string Code = nameof(YouAlreadyReservedTicketException);
 
-        public YouAlreadyReserverTicketException(string message) : base(message) { }
+        public YouAlreadyReservedTicketException(string message) : base(message) { }
     }
     
 }
